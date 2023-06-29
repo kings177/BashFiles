@@ -13,9 +13,11 @@
   tasks:
     - name: Start EC2 instance
       amazon.aws.ec2_instance:
+        aws_access_key: ""
+        aws_secret_key: ""
+        region: "us-east-1"
         instance_ids: "{{ instance_id }}"
         state: running
-        region: us-east-1
         wait: yes
       register: ec2_info
 
