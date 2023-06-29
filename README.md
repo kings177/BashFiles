@@ -1,3 +1,3 @@
-# Devops Utilities
+# ~~Devops~~ Anything Utilities
 
-Handful of useful files for devops in general.
+Handful of useful files for ~~devops~~ anything (really) in general.
