@@ -1,4 +1,6 @@
-# This is configured for AWS only.
+# !!THIS WILL ONLY WORK FOR ME, IF ANYONE WANT'S TO USE THIS, PLEASE, DO CHANGE EVERY VARIABLE AND FILE LOCATION IN EACH RESPECTIVE FILE.!!
+
+## This is configured for AWS only.
 
 Remember to set those env var before running the scripts:
 

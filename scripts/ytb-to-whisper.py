@@ -8,6 +8,7 @@ import youtube_dl
 import requests
 import argparse
 import json
+import time
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser()
@@ -27,8 +28,17 @@ except ImportError:
 model = whisper.load_model("large")
 
 # Download the video from YouTube
-with youtube_dl.YoutubeDL({'outtmpl': os.path.join(video_dir, '%(title)s.%(ext)s')}) as ydl:
+with youtube_dl.YoutubeDL({
+    'outtmpl': os.path.join(video_dir, '%(title)s.%(ext)s'),
+    'continuedl': True,
+    'nooverwrites': True,
+    }) as ydl:
+    print('Downloading videos for %s' % args.youtube_url)
+    start_time = time.time()  # record the start time
     ydl.download([args.youtube_url])
+    end_time = time.time()  # record the end time
+    print('Video download completed in %s seconds' % (end_time - start_time))  # print the elapsed time
+
 
 # Get a list of all MP4 files in the directory
 video_files = glob.glob(os.path.join(video_dir, "*.mp4"))
@@ -53,8 +63,11 @@ for video_file_path in video_files:
     # Move the original video file to the new directory
     shutil.move(video_file_path, moved_video_filename)
 
+    start_time = time.time()  # record the start time
     # Transcribe the audio file
     text = model.transcribe(converted_filename)
+    end_time = time.time()  # record the end time
+    print('Transcription completed in %s seconds' % (end_time - start_time))  # print the elapsed time
 
     # Write the transcribed text to a TXT file
     output_path = os.path.join(new_dir, "full_text.txt")
@@ -66,4 +79,11 @@ for video_file_path in video_files:
     with open(output_path, 'rb') as f:
         r = requests.post(upload_url, files={'file': f})
         print(json.loads(r.text)['data']['file']['url']['short'])
+
+
+    # Delete the video and audio files after use
+    if os.path.exists(converted_filename):
+        os.remove(converted_filename)
+    if os.path.exists(moved_video_filename):
+        os.remove(moved_video_filename)
 

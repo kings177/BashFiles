@@ -1,57 +1,72 @@
 # use the following command to run this script:
-# ansible-playbook -i hosts.ini playbook.yml -e "youtube_url=https://your-youtube-url"
+# ansible-playbook -i hosts.ini start-script-stop.yml -e "youtube_url=https://your-youtube-url"
 
+# Start EC2 instance
 - hosts: localhost
   gather_facts: no
   vars:
-    instance_id: 'your_instance_id'
+    instance_id: 'i-0c1809e602464f142'
 
   tasks:
     - name: Start EC2 instance
-      amazon.aws.ec2:
+      amazon.aws.ec2_instance:
         instance_ids: "{{ instance_id }}"
         state: running
+        region: us-east-1
         wait: yes
       register: ec2_info
 
-- hosts: "{{ ec2_info.instances[0].public_ip }}"
+    - name: Public_IP 
+      debug:
+        msg: "IP: {{ ec2_info.instances[0].network_interfaces[0].association.public_ip }}"
+        # var: ec2_info
+
+    - name: Add new instance to host group
+      add_host:
+        hostname: "{{ ec2_info.instances[0].network_interfaces[0].association.public_ip }}"
+        groupname: ec2hosts
+
+# Run script  
+- hosts: ec2hosts
   gather_facts: no
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/kingu.pem
+    ansible_user: ubuntu
+  become: yes
 
   tasks:
-    - name: Update apt cache
-      ansible.builtin.apt:
-        update_cache: yes
-      become: yes
+    # - name: Install Python3
+    #   ansible.builtin.apt:
+    #     name: python3
+    #     state: present
+    #   become: yes
 
-    - name: Install Python3
-      ansible.builtin.apt:
-        name: python3
-        state: present
-      become: yes
+    # - name: Install pip
+    #   ansible.builtin.apt:
+    #     name: python3-pip
+    #     state: present
+    #   become: yes
 
-    - name: Install pip
-      ansible.builtin.apt:
-        name: python3-pip
-        state: present
-      become: yes
+    # - name: Install necessary Python packages
+    #   ansible.builtin.pip:
+    #     name:
+    #       - youtube_dl
+    #       - requests
+    #       - boto3
+    #     executable: pip3
+    #   become: yes
 
-    - name: Install necessary Python packages
-      ansible.builtin.pip:
-        name:
-          - youtube_dl
-          - requests
-          - boto3
-        executable: pip3
-      become: yes
+    # - name: Copy script to remote
+    #   ansible.builtin.copy:
+    #   # this is the path to the script on your local machine
+    #     src: /home/michiru/devops/scripts/ytb-to-whisper.py
+    #   # this is the path to the script on the remote machine
+    #     dest: /home/ubuntu/
+    #   become: yes
 
-    - name: Copy script to remote
-      ansible.builtin.copy:
-        src: /path/to/your/script.py
-        dest: /home/ubuntu/
-
-        # Remember to change the name of the script here if necessary!
     - name: Run script
-      ansible.builtin.shell: python3 /home/ubuntu/script.py "{{ youtube_url }}"
+    # this is the path to the script on the remote machine
+      ansible.builtin.shell: python3 /home/ubuntu/ytb-to-whisper.py {{ youtube_url }}
       args:
         executable: /bin/bash
       register: script_output
@@ -60,14 +75,15 @@
       ansible.builtin.debug:
         var: script_output.stdout_lines
 
+# Stop EC2 instance
 - hosts: localhost
   gather_facts: no
   vars:
-    instance_id: 'your_instance_id'
+    instance_id: 'i-0c1809e602464f142'
 
   tasks:
     - name: Stop EC2 instance
-      amazon.aws.ec2:
+      amazon.aws.ec2_instance:
         instance_ids: "{{ instance_id }}"
         state: stopped
 
