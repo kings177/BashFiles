@@ -1,0 +1,112 @@
+# Start EC2 instance
+- hosts: localhost
+  gather_facts: no
+  vars:
+    instance_id: 'i-0c1809e602464f142'
+
+  tasks:
+    - name: Start EC2 instance
+      amazon.aws.ec2_instance:
+        instance_ids: "{{ instance_id }}"
+        state: running
+        region: us-east-1
+        wait: yes
+      register: ec2_info
+
+    - name: Public_IP 
+      debug:
+        msg: "IP: {{ ec2_info.instances[0].network_interfaces[0].association.public_ip }}"
+        # var: ec2_info
+
+    - name: Add new instance to host group
+      add_host:
+        hostname: "{{ ec2_info.instances[0].network_interfaces[0].association.public_ip }}"
+        groupname: ec2hosts
+
+
+- hosts: ec2hosts
+  gather_facts: no
+  remote_user: ubuntu
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/kingu.pem
+    ansible_user: ubuntu
+    project_dir: "~/home/ubuntu/neo-kindelia"  
+    repo_url: "https://github.com/higherorderco/neo-kindelia.git"  
+  become: yes
+
+
+  tasks:
+  - name: Check if cargo is installed 
+    shell: command -v cargo
+    register: cargo_installed
+    failed_when: false
+    become: yes
+
+  - name: Install cargo
+    shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+    when: cargo_installed.rc != 0
+
+  - name: Add Cargo to PATH
+    lineinfile:
+      dest: ~/.bashrc
+      line: 'export PATH="$HOME/.cargo/bin:$PATH"'
+    when: cargo_installed.rc != 0
+
+  - name: Install cargo-audit
+    shell: $HOME/.cargo/bin/cargo install cargo-audit
+    when: cargo_installed.rc != 0
+
+  - name: Install necessary pkgs for rust
+    apt:
+      #build-essential
+      name: build-essential
+      state: present
+      #libssl-dev
+      name: libssl-dev
+      state: present
+      #pkg-config
+      name: pkg-config
+      state: present
+    become: yes
+
+  #check if folder exists
+  - name: Check if project folder exists
+    stat:
+      path: "{{ project_dir }}"
+    register: project_dir_exists
+
+  - name: Clone project if dir doesn't exist
+    git:
+      repo: "{{ repo_url }}"
+      dest: "{{ project_dir }}"
+      clone: yes
+      force: yes
+    when: project_dir_exists.stat.exists == False
+
+  - name: Update project if dir exists
+    shell: git clone "{{ repo_url }}" "{{ project_dir }}"
+    when: project_dir_exists.stat.exists == True
+
+  # build project
+  - name: Build project
+    shell: $HOME/.cargo/bin/cargo build
+    args:
+      chdir: /bin/bash
+
+  # run cargo audit
+  - name: Run cargo audit
+    shell: $HOME/.cargo/bin/cargo audit
+    args:
+      chdir: /bin/bash
+
+# Stop EC2 instance
+# - hosts: localhost
+#   gather_facts: no
+#   vars:
+#     instance_id: 'i-0c1809e602464f142'
+
+#   tasks:
+#     - name: Stop EC2 instance
+#       amazon.aws.ec2_instance:
+#         instance_ids: "{{ instance_id }}"
+#         state: stopped
