@@ -13,6 +13,7 @@ jobs:
     - name: Test
       run: |
         output=$(node pepe 2>&1)
+        echo "Captured Error: $output"
         echo "::set-output name=log::$output"
         echo "LOG=$output" >> $GITHUB_ENV
         exit 1
@@ -56,6 +57,7 @@ jobs:
 
         if [ ! -z "$DISCORD_ID" ]; then
           SHORTENED_LOG=$(echo "$LOG" | tail -c 1900)
+          echo "Shortened LOG Value: $SHORTENED_LOG"
           MESSAGE="<@$DISCORD_ID> , CI Failed, Error log:\n\`\`\`\n$SHORTENED_LOG\n\`\`\`\n please check: $CI_LINK"
           curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
             -H "Content-Type: application/json" \
