@@ -1,0 +1,10 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    instance_id: 'i-0c1809e602464f142'
+
+  tasks:
+    - name: Stop EC2 instance
+      amazon.aws.ec2_instance:
+        instance_ids: "{{ instance_id }}"
+        state: stopped

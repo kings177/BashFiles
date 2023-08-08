@@ -1,0 +1,47 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Your CI steps go here...
+    - name: Test
+      run: |
+        # Replace this with your actual test or build commands.
+        exit 1 # This simulates a failure. Remove this.
+
+    - name: Notify Discord on Failure
+      if: failure()
+      run: |
+        COMMITTER_GITHUB=$(git show -s --format='%cn')
+        
+        # Mapping from GitHub to Discord handles
+        case "$COMMITTER_GITHUB" in
+          "kings177")
+            DISCORD_HANDLE="kingu0"
+            ;;
+        #   "test")
+        #     DISCORD_HANDLE="kingu0"
+        #     ;;
+          *)
+            DISCORD_HANDLE=""
+            ;;
+        esac
+        
+        if [ ! -z "$DISCORD_HANDLE" ]; then
+          MESSAGE="@$DISCORD_HANDLE, your recent commit failed CI. Please check."
+          curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{
+              "content": "'"$MESSAGE"'",
+              "username": "GitHub Actions"
+            }'
+        else
+          echo "Committer's Discord handle not found."
+        fi

@@ -31,7 +31,7 @@
     ansible_ssh_private_key_file: ~/.ssh/kingu.pem
     ansible_user: ubuntu
     project_dir: "~/home/ubuntu/neo-kindelia"  
-    repo_url: "https://github.com/higherorderco/neo-kindelia.git"  
+    repo_url: "https://github.com/higherorderco/neo_kindelia.git"  
   become: yes
 
 
@@ -56,14 +56,20 @@
     shell: $HOME/.cargo/bin/cargo install cargo-audit
     when: cargo_installed.rc != 0
 
-  - name: Install necessary pkgs for rust
+  - name: Build-essential
     apt:
       #build-essential
       name: build-essential
       state: present
+
+  - name: Libssl-dev
+    apt:
       #libssl-dev
       name: libssl-dev
       state: present
+
+  - name: Pkg-config
+    apt:
       #pkg-config
       name: pkg-config
       state: present
@@ -100,13 +106,13 @@
       chdir: /bin/bash
 
 # Stop EC2 instance
-# - hosts: localhost
-#   gather_facts: no
-#   vars:
-#     instance_id: 'i-0c1809e602464f142'
+- hosts: localhost
+  gather_facts: no
+  vars:
+    instance_id: 'i-0c1809e602464f142'
 
-#   tasks:
-#     - name: Stop EC2 instance
-#       amazon.aws.ec2_instance:
-#         instance_ids: "{{ instance_id }}"
-#         state: stopped
+  tasks:
+    - name: Stop EC2 instance
+      amazon.aws.ec2_instance:
+        instance_ids: "{{ instance_id }}"
+        state: stopped

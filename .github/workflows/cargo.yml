@@ -17,7 +17,7 @@ jobs:
       - name: Update local toolchain
         run:
           rustup update
-          rustup install nightly          
+          rustup install nightly
 
       - name: Toolchain info
         run: 
