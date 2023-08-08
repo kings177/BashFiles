@@ -12,7 +12,7 @@ jobs:
 
     - name: Test
       run: |
-        output="testando"
+        output=$(node pepe 2>&1)
         echo "::set-output name=log::$output"
         echo "LOG=$output" >> $GITHUB_ENV
         exit 1
