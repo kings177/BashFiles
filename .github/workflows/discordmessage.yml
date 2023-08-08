@@ -10,34 +10,34 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Your CI steps go here...
     - name: Test
       run: |
-        # Replace this with your actual test or build commands.
-        exit 1 # This simulates a failure. Remove this.
+        output=$(go test -v ./... 2>&1)
+        echo "$output"
+        exit 1
 
     - name: Notify Discord on Failure
       if: failure()
       run: |
         COMMITTER_GITHUB=$(git show -s --format='%cn')
-        
-        # Mapping from GitHub to Discord handles
+  
         case "$COMMITTER_GITHUB" in
           "kings177")
-            DISCORD_HANDLE="kingu0"
+            DISCORD_ID="353453210389839872"
             ;;
         #   "test")
-        #     DISCORD_HANDLE="kingu0"
+        #     DISCORD_ID="353453210389839872"
         #     ;;
           *)
-            DISCORD_HANDLE=""
+            DISCORD_ID=""
             ;;
         esac
         
         CI_LINK="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
-        if [ ! -z "$DISCORD_HANDLE" ]; then
-          MESSAGE="@$DISCORD_HANDLE , CI Failed, please check: $CI_LINK"
+        if [ ! -z "$DISCORD_ID" ]; then
+          SHORTENED_LOG=$(echo "$LOG" | tail -c 1900)
+          MESSAGE="<@$DISCORD_ID> , CI Failed, Error log:\n\`\`\`\n$SHORTENED_LOG\n\`\`\`\n please check: $CI_LINK"
           curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
             -H "Content-Type: application/json" \
             -d '{
@@ -45,5 +45,5 @@ jobs:
               "username": "Kindelia Bot"
             }'
         else
-          echo "Commit Owner not part of the Kindelia Team. CI failed: ."
+          echo "Commit Owner not part of the Kindelia Team. CI failed: "
         fi
