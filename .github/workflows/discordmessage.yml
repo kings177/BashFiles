@@ -34,14 +34,16 @@ jobs:
             ;;
         esac
         
+        CI_LINK="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
         if [ ! -z "$DISCORD_HANDLE" ]; then
-          MESSAGE="@$DISCORD_HANDLE, your recent commit failed CI. Please check."
+          MESSAGE="@$DISCORD_HANDLE , CI Failed, please check: $CI_LINK"
           curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
             -H "Content-Type: application/json" \
             -d '{
               "content": "'"$MESSAGE"'",
-              "username": "GitHub Actions"
+              "username": "Kindelia Bot"
             }'
         else
-          echo "Committer's Discord handle not found."
+          echo "Commit Owner not part of the Kindelia Team. CI failed: ."
         fi
