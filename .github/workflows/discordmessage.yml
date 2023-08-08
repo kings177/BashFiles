@@ -12,8 +12,9 @@ jobs:
 
     - name: Test
       run: |
-        output=$(go test -v ./... 2>&1)
-        echo "$output"
+        output="testando"
+        echo "::set-output name=log::$output"
+        echo "LOG=$output" >> $GITHUB_ENV
         exit 1
 
     - name: Notify Discord on Failure
@@ -25,8 +26,26 @@ jobs:
           "kings177")
             DISCORD_ID="353453210389839872"
             ;;
+        #   "developedby")
+        #     DISCORD_ID="204040567859052544"
+        #     ;;
+        # "eduhenke")
+        #     DISCORD_ID="572073628779413504"
+        #     ;;
+        # "boscop")
+        #     DISCORD_ID="187114713086296064"
+        #     ;;
+        # "derenash")
+        #     DISCORD_ID="191410663292272640"
+        #     ;;
+        # "sergiobonatto")
+        #     DISCORD_ID="715372754408439852"
+        #     ;;
+        # "naoehsavio")
+        #     DISCORD_ID="750119455530418276"
+        #     ;;
         #   "test")
-        #     DISCORD_ID="353453210389839872"
+        #     DISCORD_ID="353453210389839872" # Kingu's ID
         #     ;;
           *)
             DISCORD_ID=""
