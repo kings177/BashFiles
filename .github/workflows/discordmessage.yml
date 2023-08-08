@@ -1,6 +1,9 @@
-name: CI
+name: Discord CI trigger
 
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -12,10 +15,6 @@ jobs:
 
     - name: Test
       run: |
-        output=$(node pepe 2>&1)
-        echo "Captured Error: $output"
-        echo "::set-output name=log::$output"
-        echo "LOG=$output" >> $GITHUB_ENV
         exit 1
 
     - name: Notify Discord on Failure
@@ -25,25 +24,25 @@ jobs:
   
         case "$COMMITTER_GITHUB" in
           "kings177")
-            DISCORD_ID="353453210389839872"
+            DISCORD_ID="353453210389839872" # Kingu's ID
             ;;
         #   "developedby")
-        #     DISCORD_ID="204040567859052544"
+        #     DISCORD_ID="204040567859052544" # Nicolas' ID
         #     ;;
-        # "eduhenke")
-        #     DISCORD_ID="572073628779413504"
+        #   "eduhenke")
+        #     DISCORD_ID="572073628779413504" # Henke's ID
         #     ;;
-        # "boscop")
-        #     DISCORD_ID="187114713086296064"
+        #   "boscop")
+        #     DISCORD_ID="187114713086296064" # Localhorse's ID
         #     ;;
-        # "derenash")
-        #     DISCORD_ID="191410663292272640"
+        #   "derenash")
+        #     DISCORD_ID="191410663292272640" # Derenash's ID
         #     ;;
-        # "sergiobonatto")
-        #     DISCORD_ID="715372754408439852"
+        #   "sergiobonatto")
+        #     DISCORD_ID="715372754408439852" # SergioBonatto's ID
         #     ;;
-        # "naoehsavio")
-        #     DISCORD_ID="750119455530418276"
+        #   "naoehsavio")
+        #     DISCORD_ID="750119455530418276" # NaoEhSavio's ID
         #     ;;
         #   "test")
         #     DISCORD_ID="353453210389839872" # Kingu's ID
@@ -53,12 +52,11 @@ jobs:
             ;;
         esac
         
-        CI_LINK="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        CI_LINK="<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>"
+
 
         if [ ! -z "$DISCORD_ID" ]; then
-          SHORTENED_LOG=$(echo "$LOG" | tail -c 1900)
-          echo "Shortened LOG Value: $SHORTENED_LOG"
-          MESSAGE="<@$DISCORD_ID> , CI Failed, Error log:\n\`\`\`\n$SHORTENED_LOG\n\`\`\`\n please check: $CI_LINK"
+          MESSAGE="The CI from <@$DISCORD_ID>'s commit has failed, please check: $CI_LINK"
           curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
             -H "Content-Type: application/json" \
             -d '{
@@ -66,5 +64,5 @@ jobs:
               "username": "Kindelia Bot"
             }'
         else
-          echo "Commit Owner not part of the Kindelia Team. CI failed: "
+          echo "Commit Owner not part of the Kindelia Team. CI failed: $CI_LINK"
         fi
