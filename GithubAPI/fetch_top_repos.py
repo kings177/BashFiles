@@ -36,7 +36,7 @@ def save_repos_to_file(repos, language):
     with open(f'{language}_repos.json', 'w') as file:
         json.dump(repos, file, indent=4)
 
-api_token= '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'
+api_token= 'your_token'
 languages = ['Python', 'Rust', 'C', 'JavaScript']
 
 for language in languages:
