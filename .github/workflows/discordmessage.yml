@@ -54,6 +54,7 @@ jobs:
         
         CI_LINK="<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>"
 
+        # secrets.DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/1138292630699118733/-9QfspX7aBxiVYRKgyf70eBNBpCG6EhLWNHnEmdFsUmkx24RgTj3i-TkfR4ttiocUomh"
 
         if [ ! -z "$DISCORD_ID" ]; then
           MESSAGE="The CI from <@$DISCORD_ID>'s commit has failed, please check: $CI_LINK"
