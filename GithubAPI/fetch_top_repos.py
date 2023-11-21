@@ -23,7 +23,7 @@ def fetch_repos(language, api_token, max_repos=1000):
             break
 
         page += 1
-        time.sleep(0.5) # So we don't get rate limited
+        time.sleep(10) # So we don't get rate limited
 
         if len(repos) >= max_repos:
             print(f"Fetched {len(repos)} repos for {language}")
@@ -33,10 +33,10 @@ def fetch_repos(language, api_token, max_repos=1000):
 
 def save_repos_to_file(repos, language):
     """Save the repos to a file."""
-    with open(f'{language}_repos.json', 'w') as file:
+    with open(f'./jsons/{language}_repos.json', 'w') as file:
         json.dump(repos, file, indent=4)
 
-api_token= 'your_token'
+api_token= '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'
 languages = ['Python', 'Rust', 'C', 'JavaScript']
 
 for language in languages:
