@@ -30,10 +30,14 @@ def search_in_repo(repo_url, keyword, api_token):
     url = f"https://api.github.com/search/code?q={query}"
 
     remaining, reset = get_rate_limit(api_token)
-    if remaining == 0:
+    if remaining <= 1:
         wait_for_rate_limit_reset(reset)
 
     response = requests.get(url, headers=headers)
+
+    print(f"Searching for {keyword} in {repo_url}, Remaining requests: {remaining}")
+    print(f"Response: {response.json()}")
+
     return response.status_code == 200 and response.json()['total_count'] > 0
 
 def analyze_repositories(language, threading_keyword, api_token):
@@ -47,12 +51,12 @@ def analyze_repositories(language, threading_keyword, api_token):
 
     return count
 
-api_token = 'YOU_TOKEN'
+api_token = 'YOUR_TOKEN'
 threading_keywords = {
-    'Python': 'import threading',
+    'Python': 'threading',
     'Rust': 'std::thread',
-    'C': '#include <pthread.h>',
-    'JavaScript': "require('worker_threads')"
+    'C': 'pthread',
+    'JavaScript': "worker_threads)"
 }
 
 result = {}
