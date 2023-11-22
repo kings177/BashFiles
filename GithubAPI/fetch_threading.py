@@ -46,13 +46,15 @@ def search_in_repo(repo_url, keyword, api_token):
 def analyze_repositories(language, threading_keyword, api_token):
     repos = load_repos(f'./jsons/{language}_repos.json')
     count = 0
+    found_repos = []
 
     for repo in repos:
         repo_url = repo['html_url']
         if search_in_repo(repo_url, threading_keyword, api_token):
             count += 1
+            found_repos.append(repo_url)
 
-    return count
+    return count, found_repos
 
 api_token = ''
 threading_keywords = {
@@ -65,11 +67,15 @@ threading_keywords = {
 result = {}
 for language, keyword in threading_keywords.items():
     print(f"Analyzing {language} repositories...")
-    count = analyze_repositories(language, keyword, api_token)
+    count, found_repos = analyze_repositories(language, keyword, api_token)
     result[language] = count
     print(f"{language}: {count} out of 1000 repositories use threading")
 
-print("Threading usage by language:")
-for language, count in result.items():
-    print(f"{language}: {count} out of 1000 repositories use threading")
+    filename = f'./txts/{language}_threading_results.txt'
+    with open(filename, 'w') as file:
+        file.write(f"Total repositories using {keyword}: {count}\n")
+        for repo in found_repos:
+            file.write(repo + '\n')
+
+    print(f"Results for {language} saved to {filename}")
 
