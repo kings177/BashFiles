@@ -23,21 +23,34 @@ def wait_for_rate_limit_reset(reset_time):
         print(f"Rate limit exceeded. Sleeping for {wait_time} seconds")
         time.sleep(wait_time + 10)
 
+
+api_call_counter = 0
+
 def search_in_repo(repo_url, keyword, api_token):
     """ Search for a keyword in a repository """
+    global api_call_counter
+
     headers = {'Authorization': f'token {api_token}'}
     repo_full_name = repo_url.replace('https://github.com/', '')
     query = f"{keyword}+repo:{repo_full_name}"
     url = f"https://api.github.com/search/code?q={query}"
 
-    remaining, reset = get_rate_limit(api_token)
-    if remaining <= 1:
-        wait_for_rate_limit_reset(reset)
+    api_call_counter += 1
+
+    if api_call_counter % 25 == 0:
+        remaining, reset = get_rate_limit(api_token)
+        if remaining <= 1:
+            wait_for_rate_limit_reset(reset)
+
+    print(f"Searching for {keyword} in {repo_url}, Remaining requests before call: {remaining}")
 
     response = requests.get(url, headers=headers)
 
-    print(f"Searching for {keyword} in {repo_url}, Remaining requests: {remaining}")
-    print(f"Response: {response.json()}")
+    remaining_after, _ = get_rate_limit(api_token)
+    print(f"Remaining requests after call: {remaining_after}")
+
+    # print(f"Response: {response.json()}")
+    time.sleep(1)
 
     return response.status_code == 200 and response.json()['total_count'] > 0
 
@@ -52,7 +65,7 @@ def analyze_repositories(language, threading_keyword, api_token):
 
     return count
 
-api_token = 'YOUR_TOKEN'
+api_token = ''
 threading_keywords = {
     'Python': 'threading',
     'Rust': 'std::thread',
