@@ -21,12 +21,13 @@ def wait_for_rate_limit_reset(reset_time):
     wait_time = reset_time - time.time()
     if wait_time > 0:
         print(f"Rate limit exceeded. Sleeping for {wait_time} seconds")
-        time.sleep(wait_time + 5)
+        time.sleep(wait_time + 10)
 
 def search_in_repo(repo_url, keyword, api_token):
     """ Search for a keyword in a repository """
     headers = {'Authorization': f'token {api_token}'}
-    query = f"{keyword}+repo:{repo_url}"
+    repo_full_name = repo_url.replace('https://github.com/', '')
+    query = f"{keyword}+repo:{repo_full_name}"
     url = f"https://api.github.com/search/code?q={query}"
 
     remaining, reset = get_rate_limit(api_token)
