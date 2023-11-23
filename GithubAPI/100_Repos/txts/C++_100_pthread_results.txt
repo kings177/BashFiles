@@ -1,0 +1,447 @@
+https://github.com/torvalds/linux
+- tools/mm/Makefile:11 CFLAGS += -Wall -Wextra -I../lib/ -pthread
+- Documentation/block/ublk.rst:119   pthread & io_uring for handling ublk IO), this command is sent to the
+- tools/perf/ui/ui.h:34 void pthread__block_sigwinch(void);
+- tools/usb/testusb.c:2 /* $(CROSS_COMPILE)cc -Wall -Wextra -g -lpthread -o testusb testusb.c */
+- Documentation/locking/rt-mutex.rst:6 which enable pthread_mutex_t priority inheritance attributes
+
+https://github.com/netdata/netdata
+- build/m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- aclk/aclk_query.h:12 extern pthread_cond_t query_cond_wait;
+- aclk/aclk_query.c:11 pthread_cond_t query_cond_wait = PTHREAD_COND_INITIALIZER;
+- libnetdata/locks/locks.h:9 typedef pthread_mutex_t netdata_mutex_t;
+- libnetdata/locks/locks.c:33         int ret = pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &old);
+
+https://github.com/ventoy/Ventoy
+- ExFAT/buidexfat.sh:32 ./configure --prefix="$CUR" CFLAGS='-static -O2 -D_FILE_OFFSET_BITS=64' FUSE_CFLAGS="-I$CUR/LIBFUSE/include/" FUSE_LIBS="$CUR/LIBFUSE/lib/libfuse.a -pthread $opt -ldl"
+- LinuxGUI/build.sh:43         -l pthread \
+- Plugson/src/Core/ventoy_log.c:30 static pthread_mutex_t g_log_mutex;
+- LinuxGUI/build_gtk.sh:10         GTKFLAG="-pthread -I$EXD/usr/include/gtk-3.0 -I$EXD/usr/include/atk-1.0 -I$EXD/usr/include/at-spi2-atk/2.0 -I$EXD/usr/include/pango-1.0 -I$EXD/usr/include/gio-unix-2.0/ -I$EXD/usr/include/cairo -I$EXD/usr/include/gdk-pixbuf-2.0 -I$EXD/usr/include/glib-2.0 -I$EXD/usr/lib64/glib-2.0/include -I$EXD/usr/include/at-spi-2.0 -I$EXD/usr/include/dbus-1.0 -I$EXD/usr/lib64/dbus-1.0/include -I$EXD/usr/include/harfbuzz -I$EXD/usr/include/freetype2 -I$EXD/usr/include/pixman-1 -I$EXD/usr/include/libpng15 -I$EXD/usr/include/libdrm"
+- Plugson/src/Core/ventoy_util.h:40 typedef HANDLE pthread_mutex_t;
+
+https://github.com/obsproject/obs-studio
+- libobs/obs-view.c:26 	pthread_mutex_init_value(&view->channels_mutex);
+- UI/platform-x11.cpp:44 #include <pthread_np.h>
+- libobs/obs-audio.c:507 		pthread_mutex_lock(&audio->task_mutex);
+- libobs/util/task.c:7 	pthread_t thread;
+- libobs/obs-scene.h:81 	pthread_mutex_t actions_mutex;
+
+https://github.com/ggerganov/llama.cpp
+- README.md:128 I CFLAGS:   -I.            -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -pthread -DGGML_USE_K_QUANTS -DGGML_USE_ACCELERATE
+- Makefile:250 	MK_CFLAGS   += -pthread
+- examples/server/httplib.h:189 #include <pthread.h>
+- docs/BLIS.md:15 ./configure --enable-cblas -t openmp,pthreads auto
+
+https://github.com/FFmpeg/FFmpeg
+- libavcodec/pthread.c:36 #include "pthread_internal.h"
+- libavcodec/pthread_slice.c:30 #include "pthread_internal.h"
+- libavcodec/pthread_internal.h:39  * an uninitialized mutex/condition, ff_pthread_init() stores the number
+- libavcodec/pthread_frame.c:37 #include "pthread_internal.h"
+- compat/atomics/pthread/stdatomic.c:24 #include <pthread.h>
+
+https://github.com/php/php-src
+- TSRM/TSRM.h:49 # include <pthread.h>
+- TSRM/threads.m4:67 #include <pthread.h>
+- TSRM/TSRM.c:110 static pthread_key_t tls_key;
+- Zend/Zend.m4:149 AC_CHECK_FUNCS(getpid kill pthread_getattr_np pthread_attr_get_np pthread_get_stackaddr_np pthread_attr_getstack pthread_stackseg_np gettid)
+- Zend/zend_call_stack.c:39 # include <pthread.h>
+
+https://github.com/wg/wrk
+- src/ssl.c:3 #include <pthread.h>
+- src/atomicvar.h:16  *  pthread_mutex_t myvar_mutex;
+- src/wrk.c:123         if (!t->loop || pthread_create(&t->thread, NULL, &thread_main, t)) {
+- src/zmalloc.c:43 #include <pthread.h>
+- Makefile:2 LIBS    := -lm -lssl -lcrypto -lpthread
+
+https://github.com/curl/curl
+- lib/easy_lock.h:98 #include <pthread.h>
+- lib/curl_threads.h:30 #  define curl_mutex_t           pthread_mutex_t
+- docs/examples/Makefile.example:46 # We need -lpthread for the pthread example
+- lib/vtls/mbedtls_threadlock.c:32 #  include <pthread.h>
+- configure.ac:780     LIB_HYPER="-lhyper -ldl -lpthread -lm"
+
+https://github.com/bilibili/ijkplayer
+- ijkmedia/ijksdl/ijksdl_mutex.h:29 #include <pthread.h>
+- ijkmedia/ijksdl/ijksdl_mutex.c:38     if (pthread_mutex_init(&mutex->id, NULL) != 0) {
+- ijkmedia/ijksdl/ijksdl_thread.c:40     pthread_setname_np(pthread_self(), thread->name);
+- ijkmedia/ijkplayer/ijkplayer.c:53     pthread_mutex_destroy(&mp->mutex);
+- ijkmedia/ijkplayer/ijkplayer_internal.h:35     pthread_mutex_t mutex;
+
+https://github.com/coolsnowwolf/lede
+- include/site/linux:32 ac_cv_func_pthread_key_delete=yes
+- package/wwan/app/fibocom-dial/src/util.c:19 static pthread_mutex_t printfMutex = PTHREAD_MUTEX_INITIALIZER;
+- package/network/services/shellsync/Makefile:12   DEPENDS:=+libpthread +kmod-macvlan
+- package/wwan/app/fibocom-dial/src/udhcpc.c:205 	pthread_attr_t udhcpc_thread_attr;
+- scripts/ext-toolchain.sh:36 	pthread:  libpthread-* libpthread
+
+https://github.com/jqlang/jq
+- m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/jv_alloc.c:46 #include <pthread.h>
+- configure.ac:125 dnl Find pthread, if we have it. We do this first because we may set -pthread on CFLAGS
+- src/jv_thread.h:10 /* Copied from Heimdal: pthread-like mutexes for WIN32 -- see lib/base/heimbase.h in Heimdal */
+- src/jv_dtoa_tsd.c:9 static pthread_once_t dtoa_ctx_once = PTHREAD_ONCE_INIT;
+
+https://github.com/ggerganov/whisper.cpp
+- Makefile:98 	CFLAGS   += -pthread
+- README.md:96 cc  -I.              -O3 -std=c11   -pthread -DGGML_USE_ACCELERATE   -c ggml.c -o ggml.o
+- examples/server/httplib.h:195 #include <pthread.h>
+- CMakeLists.txt:341             set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -pthread")
+
+https://github.com/ggreer/the_silver_searcher
+- m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/log.c:7 pthread_mutex_t print_mtx = PTHREAD_MUTEX_INITIALIZER;
+- src/log.h:9 #include <pthread.h>
+- configure.ac:21 m4_include([m4/ax_pthread.m4])
+- src/main.c:19 #include <pthread.h>
+
+https://github.com/pjreddie/darknet
+- src/demo.c:199     pthread_t detect_thread;
+- src/data.h:3 #include <pthread.h>
+- examples/tag.c:18     pthread_t load_thread;
+- examples/voxel.c:71     pthread_t load_thread = load_data_in_thread(args);
+- examples/swag.c:43     pthread_t load_thread = load_data_in_thread(args);
+
+https://github.com/openssl/openssl
+- crypto/threads_pthread.c:50     if ((lock = CRYPTO_zalloc(sizeof(pthread_rwlock_t), NULL, 0)) == NULL)
+- doc/man3/OPENSSL_fork_prepare.pod:34 Platforms with fork(2) but without pthread_atfork(3) will probably need
+- util/platform_symbols/unix-symbols.txt:81 pthread_attr_destroy
+- crypto/thread/arch/thread_posix.c:38     pthread_attr_t attr;
+- INSTALL.md:1820 OpenSSL provides built-in support for two threading models: pthreads (found on
+
+https://github.com/robertdavidgraham/masscan
+- src/pixie-threads.c:11 #include <pthread.h>
+- Makefile:39 LIBS = -lm -lrt -ldl -lpthread
+
+https://github.com/arendst/Tasmota
+- lib/lib_rf/RF24/utility/RPi/spi.cpp:2 #include <pthread.h>
+- lib/lib_rf/RF24/utility/RPi/interrupt.c:22 #include <pthread.h>
+- lib/lib_basic/IRremoteESP8266/IRremoteESP8266/tools/Makefile:28 CXXFLAGS += -g -Wall -Wextra -pthread -std=gnu++11
+- lib/lib_rf/RF24/utility/SPIDEV/interrupt.c:22 #include <pthread.h>
+- lib/lib_basic/IRremoteESP8266/IRremoteESP8266/test/Makefile:31 CXXFLAGS += -g -Wall -Wextra -Werror -pthread -std=gnu++11
+
+https://github.com/Awesome-HarmonyOS/HarmonyOS
+- Huawei_LiteOS/components/security/mbedtls/mbedtls-2.6.0/programs/ssl/ssl_pthread_server.c:2  *  SSL server demonstration program using pthread for handling multiple
+- Huawei_LiteOS/components/security/mbedtls/mbedtls-2.6.0/programs/Makefile:76 APPS +=	ssl/ssl_pthread_server$(EXEXT)
+- Huawei_LiteOS/components/security/mbedtls/mbedtls-2.6.0/library/CMakeLists.txt:3 option(LINK_WITH_PTHREAD "Explicitly link mbed TLS library to pthread." OFF)
+- Huawei_LiteOS/components/security/mbedtls/mbedtls-2.6.0/library/threading.c:33 static void threading_mutex_init_pthread( mbedtls_threading_mutex_t *mutex )
+- Huawei_LiteOS_Kernel/Huawei_LiteOS/kernel/base/include/los_task.ph:284     VOID                        *pThreadJoin;               /**< pthread adaption            */
+
+https://github.com/koekeishiya/yabai
+- src/manifest.m:30 #include <pthread.h>
+- src/event_loop.h:66     pthread_t thread;
+- src/osax/loader.m:31 "\x48\xB8"                         // movabs     rax, pthread_create_from_mach_thread
+- src/osax/payload.m:22 #include <pthread.h>
+- src/window_manager.c:451     pthread_mutex_lock(&g_window_manager.window_animations_lock);
+
+https://github.com/iovisor/bcc
+- tools/tplist_example.txt:36 $ tplist -l pthread     # list probes in libpthread
+- tools/deadlock.py:11 # This traces pthread mutex lock and unlock calls to build a directed graph
+- tools/deadlock_example.txt:4 attaches uprobes on `pthread_mutex_lock` and `pthread_mutex_unlock` to build
+- tools/threadsnoop.py:42 # Since version 2.34, pthread features are integrated in libc
+- man/man8/trace.8:134 The USDT probe name. For example, "pthread_create".
+
+https://github.com/kingToolbox/WindTerm
+- src/libssh/src/threads/pthread.c:28 #include <pthread.h>
+- src/libssh/config.h.cmake:82 /* Define to 1 if you have the <pthread.h> header file. */
+- src/libssh/doc/threading.dox:6  - Your system must support libpthread or, in Windows environment,
+- src/libssh/include/libssh/threads.h:29 #include <pthread.h>
+- src/Onigmo/ltmain.sh:4554 	   # Do not include libc_r directly, use -pthread flag.
+
+https://github.com/jarun/nnn
+- src/nnn.c:84 #include <pthread.h>
+- patches/restorepreview/mainline.diff:228 +					pthread_t tid;
+- misc/musl/musl-static-ubuntu.sh:61 musl-gcc -O3 -DNORL -DNOMOUSE -std=c11 -Wall -Wextra -Wshadow -I./netbsd-curses/libcurses -I./musl-fts -o "$BIN" src/nnn.c -Wl,-Bsymbolic-functions -lpthread -L./netbsd-curses/libs -lcurses -lterminfo -static -L./musl-fts/.libs -lfts
+- Makefile:154 LDLIBS += $(LDLIBS_CURSES) -lpthread
+- CHANGELOG:250 - multi-threaded disk usage calculation using pthreads and FTS
+
+https://github.com/allinurl/goaccess
+- src/ui.h:44 #include <pthread.h>
+- configure.ac:28 # pthread
+- src/gdns.c:40 #include <pthread.h>
+- src/gwsocket.c:298   pthread_t writer, reader;
+- src/goaccess.h:38 extern int active_gdns;         /* kill dns pthread flag */
+
+https://github.com/openwrt/openwrt
+- toolchain/gcc/patches-11.x/701-riscv-linux-Don-t-add-latomic-with-pthread.patch:4 Subject: [PATCH] riscv/linux: Don't add -latomic with -pthread
+- include/site/linux:32 ac_cv_func_pthread_key_delete=yes
+- scripts/ext-toolchain.sh:37 	pthread:  libpthread-* libpthread
+- package/utils/busybox/Makefile:97 LDLIBS += $(call BUSYBOX_IF_ENABLED,PAM,pam pam_misc pthread)
+- toolchain/gcc/common.mk:76 export ac_cv_search_ZSTD_compress=$(STAGING_DIR_HOST)/lib/libzstd.a -pthread
+
+https://github.com/raysan5/raylib
+- examples/CMakeLists.txt:35         add_if_flag_compiles("-pthread" CMAKE_C_FLAGS)
+- examples/core/core_loading_thread.c:5 *   NOTE: This example requires linking with pthreads library on MinGW, 
+- cmake/LibraryConfigurations.cmake:29         find_library(pthread NAMES pthread)
+- src/Makefile:309     # NOTE: When using multi-threading in the user code, it requires -pthread enabled
+- examples/build.zig:19         // zig's mingw headers do not include pthread.h
+
+https://github.com/ish-app/ish
+- util/sync.c:9     pthread_condattr_t attr;
+- app/IOSCalls.m:11 #include <pthread.h>
+- util/sync.h:5 #include <pthread.h>
+- util/timer.h:6 #include <pthread.h>
+- fs/tty-real.c:6 #include <pthread.h>
+
+https://github.com/postgres/postgres
+- config/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/port/pthread-win32.h:2  * src/port/pthread-win32.h
+- src/include/port/pg_pthread.h:5  *	  Currently this supplies an implementation of pthread_barrier_t for the
+- src/port/pthread_barrier_wait.c:3  * pthread_barrier_wait.c
+- src/interfaces/libpq/pthread-win32.c:3 * pthread-win32.c
+
+https://github.com/reactos/reactos
+- sdk/include/c++/stlport/pthread.h:24 #  include "/usr/include/pthread.h"
+- sdk/include/c++/stlport/pthread_alloc:38 # include <stl/_pthread_alloc.h>
+- sdk/include/c++/stlport/stl/_pthread_alloc.h:93 typedef _STLP_PRIV _Pthread_alloc __pthread_alloc;
+- sdk/include/c++/stlport/stl/_threads.h:27 // Supported threading models are native SGI, pthreads, uithreads
+- modules/rosapps/applications/net/dhcpd/config.h.in:10 /* Define if you have the <pthread.h> header file.  */
+
+https://github.com/swaywm/sway
+- sway/realtime.c:4 #include <pthread.h>
+- meson.build:86 threads = dependency('threads') # for pthread_setschedparam
+
+https://github.com/jart/cosmopolitan
+- libc/intrin/pthread_tid.c:23 int _pthread_tid(struct PosixThread *pt) {
+- libc/calls/pthread_yield.c:30 int pthread_yield(void) {
+- libc/thread/pthread_self.c:27 pthread_t pthread_self(void) {
+- libc/thread/pthread_exit.c:38 void _pthread_unwind(struct PosixThread *pt) {
+- libc/intrin/pthread_next.c:25 intptr_t _pthread_syshand(struct PosixThread *pt) {
+
+https://github.com/alibaba/tengine
+- auto/lib/perl/conf:55         # FreeBSD port wants to link with -pthread non-threaded perl
+- src/os/unix/ngx_thread.h:17 #include <pthread.h>
+- src/core/ngx_thread_pool.c:110     pthread_t       tid;
+- src/os/unix/ngx_thread_id.c:28 #include <pthread_np.h>
+- modules/ngx_http_xquic_module/config:36            -L$XQUIC_LIB -lxquic -Wl,-rpath=$XQUIC_LIB -lrt -pthread -lm"
+
+https://github.com/videolan/vlc
+- contrib/src/pthread-stubs/rules.mak:2 PTHREAD_STUBS_URL := https://xcb.freedesktop.org/dist/libpthread-stubs-$(PTHREAD_STUBS_VERSION).tar.bz2
+- contrib/src/openjpeg/openjp2_pthread.patch:17     add_definitions( -DMUTEX_pthread)
+- contrib/src/gcrypt/fix-pthread-detection.patch:7 -have_pthread=no
+- contrib/src/protobuf/protobuf-no-mingw-pthread.patch:1 --- protobuf/m4/acx_pthread.m4.orig	2022-02-23 11:15:51.818483000 +0100
+- bin/vlc.c:39 # include <pthread.h>
+
+https://github.com/ffmpegwasm/ffmpeg.wasm
+- Makefile:3 MT_FLAGS := -sUSE_PTHREADS -pthread
+- build/libvpx.sh:14   --extra-cflags="$CFLAGS"                           # flags to use pthread and code optimization
+- build/harfbuzz.sh:7 # A hacky way to disable pthread
+- src/fftools/ffprobe.c:70 #  ifdef pthread_mutex_lock
+- src/fftools/ffmpeg.c:3729     pthread_join(f->thread, NULL);
+
+https://github.com/systemd/systemd
+- src/basic/pthread-util.h:4 #include <pthread.h>
+- src/libudev/libudev.pc.in:19 Libs.private: -lrt -pthread
+- src/shared/async.c:75          * It is important to us that we don't use threads (via glibc pthread) in PID 1, hence we'll do a
+- src/nss-systemd/nss-systemd.c:4 #include <pthread.h>
+- src/basic/signal-util.c:246         r = pthread_sigmask(SIG_SETMASK, NULL, &ss);
+
+https://github.com/openresty/openresty
+- util/package-win32.sh:30     cp $mingw32/bin/libwinpthread-1.dll $name/ || exit 1
+
+https://github.com/sumatrapdfreader/sumatrapdf
+- ext/lcms2/m4/acx_pthread.m4:1 ##### http://autoconf-archive.cryp.to/acx_pthread.html
+- ext/libwebp/m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- mupdf/Makerules:153   LDFLAGS += -pthread
+- ext/unrar/makefile:11 LDFLAGS=-pthread
+- ext/dav1d/src/mem.c:35     pthread_mutex_destroy(&pool->lock);
+
+https://github.com/jedisct1/libsodium
+- m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/libsodium/sodium/core.c:9 # include <pthread.h>
+- configure.ac:132 AC_ARG_WITH(pthreads, AS_HELP_STRING([--with-pthreads],
+- dist-build/wasm32-wasi.sh:33   --disable-ssp --disable-shared --without-pthreads; then
+- ChangeLog:276  - The pthreads library is not required any more when using MingW.
+
+https://github.com/haiwen/seafile
+- common/log.c:7 #include <pthread.h>
+- configure.ac:80 AC_CHECK_LIB(pthread, pthread_create, [echo "found library pthread"], AC_MSG_ERROR([*** Unable to find pthread library]), )
+- daemon/cevent.c:20     pthread_mutex_init (&manager->mutex, NULL);
+- common/branch-mgr.c:81     pthread_mutex_t db_lock;
+- daemon/wt-monitor-macos.c:25     pthread_mutex_t hash_lock;
+
+https://github.com/EZLippi/Tinyhttpd
+- httpd.c:9  *  1) Comment out the #include <pthread.h> line.
+- README.md:9   1) Comment out the #include <pthread.h> line.
+- Makefile:2 LIBS = -lpthread #-lsocket
+
+https://github.com/audacity/audacity
+- lib-src/lv2/sord/wscript:65         if conf.check(cflags=['-pthread'], mandatory=False):
+- lib-src/libsbsms/src/sms.h:7 #include "pthread.h"
+- lib-src/libsbsms/src/sbsms.cpp:6 #include <pthread.h>
+- lib-src/lv2/lv2/waflib/extras/boost.py:72 #include <pthread.h>
+- lib-src/lv2/lv2/waflib/extras/halide.py:145 		#conf.env.LIB_HALIDE += ['ncurses', 'dl', 'pthread']
+
+https://github.com/libevent/libevent
+- evthread_pthread.c:32 #include <pthread.h>
+- m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- Makefile.am:153 LIBEVENT_LIBS_LA += libevent_pthreads.la
+- event-config.h.cmake:244 /* Define if we have pthreads on this system */
+- include/event2/thread.h:43   evthread_use_pthreads() respectively.  If you're using another threading
+
+https://github.com/ImageMagick/ImageMagick
+- m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- m4/Makefile.am:31   ax_pthread.m4  \
+- MagickCore/mutex.h:40 static pthread_mutex_t
+- MagickCore/semaphore.c:215     pthread_mutexattr_t
+- Magick++/lib/Magick++/Thread.h:23 # include <pthread.h>
+
+https://github.com/blender/blender
+- build_files/build_environment/cmake/pthreads.cmake:13   set(PTHREADS_BUILD cd ${BUILD_DIR}/pthreads/src/external_pthreads/ && cd && nmake VC-static /e CPPFLAGS=${PTHREAD_CPPFLAGS})
+- intern/clog/clog.c:17  * to avoid having to link with pthreads. */
+- intern/cycles/util/thread.h:17 #  include <pthread.h>
+- source/creator/symbols_unix.map:36   pthread_*;
+- intern/cycles/util/thread.cpp:20   pthread_attr_t attribute;
+
+https://github.com/cesanta/mongoose
+- examples/multi-threaded/main.c:23 #include <pthread.h>
+- Makefile:24 COMMON_CFLAGS ?= $(C_WARN) $(WARN) $(INCS) $(DEFS) -DMG_ENABLE_IPV6=$(IPV6) $(TFLAGS) -pthread
+- examples/esp8266/http-client-server/src/sdkconfig:404 CONFIG_PTHREAD_TASK_NAME_DEFAULT="pthread"
+- examples/multi-threaded/Makefile:17   CFLAGS += -lpthread                 # Link against POSIX threads library
+- test/unit_test.c:3163 #include <pthread.h>
+
+https://github.com/coturn/coturn
+- src/apps/relay/ns_sm.h:40 #include <pthread.h>
+- src/apps/common/ns_turn_utils.c:39 #include <pthread.h>
+- src/apps/relay/dbdrivers/dbdriver.c:43 static void make_connection_key(void) { (void)pthread_key_create(&connection_key, NULL); }
+- src/apps/relay/CMakeLists.txt:5 check_function_exists("pthread_barrier_init" HAVE_THREAD_BARRIERS)
+- ChangeLog:1095 		* pthread test fixed.
+
+https://github.com/Tencent/wcdb
+- android/jni/Mutex.h:20 #include <pthread.h>
+- src/swift/util/Lock.swift:43     private var mutex = pthread_mutex_t()
+- backup/mm_backup.c:24 #include <pthread.h>
+- src/common/base/Thread.hpp:47            pthread_t pthreadId
+- src/common/platform/CrossPlatform.h:52 #pragma mark - pthread
+
+https://github.com/huangz1990/redis-3.0-annotated
+- src/bio.c:90 static pthread_t bio_threads[REDIS_BIO_NUM_OPS];
+- src/zmalloc.c:43 #include <pthread.h>
+- src/Makefile:61 	FINAL_LIBS+= -ldl -lnsl -lsocket -lpthread
+- src/redis.h:48 #include <pthread.h>
+- deps/jemalloc/src/mutex.c:24 static void	pthread_create_once(void);
+
+https://github.com/cockpit-project/cockpit
+- src/tls/server.c:28 #include <pthread.h>
+- src/tls/httpredirect.c:25 #include <pthread.h>
+- src/Makefile.am:57 	-pthread \
+- src/tls/socket-activation-helper.c:25 #include <pthread.h>
+- src/tls/connection.c:32 #include <pthread.h>
+
+https://github.com/OpenVPN/openvpn
+- src/openvpn/errlevel.h:181 /*#define D_THREAD_DEBUG       LOGLEV(4, 70, M_DEBUG)*/  /* show pthread debug information */
+
+https://github.com/libgit2/libgit2
+- src/util/unix/pthread.h:8 #ifndef INCLUDE_unix_pthread_h__
+- src/util/thread.c:111 	if (pthread_key_create(key, destroy_fn) != 0)
+- examples/CMakeLists.txt:17 	target_link_libraries(lg2 libgit2package pthread)
+- src/util/runtime.c:88  * pthread_spinlock_t.
+- src/util/thread.h:74 #   include "unix/pthread.h"
+
+https://github.com/leandromoreira/ffmpeg-libav-tutorial
+- Dockerfile:398         DIR=/tmp/libpthread-stubs && \
+
+https://github.com/torch/torch7
+- lib/TH/THAtomic.c:18 #include <pthread.h>
+- lib/TH/cmake/FindMKL.cmake:177             "mkl_${mkliface}${mkl64};${mklthread};mkl_core;${mklrtl};pthread;${mkl_m};${mkl_dl}" "")
+- lib/TH/CMakeLists.txt:299     MESSAGE(STATUS "Atomics: using pthread")
+- lib/TH/cmake/FindBLAS.cmake:128   "openblas;pthread")
+
+https://github.com/irungentoo/toxcore
+- m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- toxav/msi.h:26 #include <pthread.h>
+- toxav/audio.c:105     pthread_mutex_destroy(ac->queue_mutex);
+- toxav/video.c:113     pthread_mutex_destroy(vc->queue_mutex);
+- configure.ac:491         AC_MSG_ERROR([required library pthread was not found on your system])
+
+https://github.com/libretro/RetroArch
+- libretro-common/rthreads/gx_pthread.h:4  * The following license statement only applies to this file (gx_pthread.h).
+- libretro-common/rthreads/psp_pthread.h:4  * The following license statement only applies to this file (psp_pthread.h).
+- gfx/include/userland/interface/vcos/pthreads/CMakeLists.txt:20    vcos_pthreads.c
+- gfx/include/userland/interface/vcos/pthreads/vcos_pthreads.c:72 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+- pkg/emscripten/README.md:52 Some emulators can be compiled with `pthreads` support to increase performance. You will need to compile the core and frontend with special flags to support this and also serve the content from an HTTPS endpoint with specific headers.
+
+https://github.com/nmap/nmap
+- libpcre/m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- ltmain.sh:4554 	   # Do not include libc_r directly, use -pthread flag.
+- libpcre/Makefile.am:52   m4/ax_pthread.m4 m4/pcre2_visibility.m4
+- libpcap/configure.ac:615 # For various things that might use pthreads.
+- libpcap/CMakeLists.txt:1224     # If it's not pthreads, we won't use it; we use it for libraries
+
+https://github.com/openwall/john
+- src/m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/uaf_encode.c:76 #include <pthread.h>
+- src/autoconfig.h.in:470    <pthread.h>, or <semaphore.h> is not used. If the typedef were allowed, the
+- src/configure.ac:34 m4_include([m4/ax_pthread.m4])
+- .circleci/circle-ci.sh:12     cp "$basepath/libwinpthread-1.dll" ../run
+
+https://github.com/gcc-mirror/gcc
+- gcc/config/i386/mingw-pthread.h:1 /* Defines that pthread library shall be enabled by default
+- libgcc/config/i386/t-mingw-pthread:1 SHLIB_PTHREAD_CFLAG = -pthread
+- gcc/testsuite/gcc.dg/pthread-init-2.c:2  * pthread initialization macros when __STDC__ is defined.
+- libphobos/libdruntime/core/sys/darwin/pthread.d:14 module core.sys.darwin.pthread;
+- libstdc++-v3/testsuite/18_support/pthread_guard.cc:20 // { dg-options "-pthread"  }
+
+https://github.com/yugabyte/yugabyte-db
+- src/postgres/config/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/postgres/src/port/pthread-win32.h:2  * src/port/pthread-win32.h
+- src/postgres/src/interfaces/libpq/pthread-win32.c:3 * pthread-win32.c
+- src/postgres/src/interfaces/ecpg/include/ecpg-pthread-win32.h:1 /* src/interfaces/ecpg/include/ecpg-pthread-win32.h */
+- src/yb/util/mutex.h:34 #include <pthread.h>
+
+https://github.com/rui314/chibicc
+- Makefile:18 	$(CC) -pthread -o $@ test/$*.o -xc test/common
+- test/tls.c:3 #include <pthread.h>
+- test/atomic.c:3 #include <pthread.h>
+
+https://github.com/darktable-org/darktable
+- src/common/dtpthread.c:25 #include <pthread.h>
+- src/common/dtpthread.h:26 #include <pthread.h>
+- src/common/atomic.h:73 #include <pthread.h>
+- ConfigureChecks.cmake:59 # Check for pthread struct members
+- src/lua/lua.h:27 #include "common/dtpthread.h"
+
+https://github.com/Cyan4973/xxHash
+- tests/collisions/pool.c:38 #include "threading.h"   /* pthread adaptation */
+- tests/collisions/Makefile:33 LDFLAGS  += -pthread
+- tests/collisions/threading.h:48 #define ZSTD_pthread_mutex_t           CRITICAL_SECTION
+- tests/collisions/threading.c:14  * This file will hold wrapper for systems, which do not support pthreads
+- tests/collisions/main.c:917 // wrapper for pthread interface
+
+https://github.com/tporadowski/redis
+- src/Win32_Interop/Win32_PThread.h:19 /* threads avoiding pthread.h */
+- src/Win32_Interop/Win32_PThread.c:37 int pthread_create(pthread_t *thread, const void *unused, void *(*start_routine)(void*), void *arg) {
+- src/Makefile:91 	FINAL_LIBS+= -ldl -lnsl -lsocket -lresolv -lpthread -lrt
+- src/bio.c:70 static pthread_t bio_threads[BIO_NUM_OPS];
+- src/atomicvar.h:16  *  pthread_mutex_t myvar_mutex;
+
+https://github.com/ggerganov/ggml
+- examples/python/ggml/cffi.py:8     _struct_unions = ((b'\x00\x00\x04\x27\x00\x00\x00\x02$1',b'\x00\x00\x22\x11n_iter',b'\x00\x00\xF4\x11sched',b'\x00\x00\xF4\x11decay',b'\x00\x00\xF4\x11alpha',b'\x00\x00\xF4\x11beta1',b'\x00\x00\xF4\x11beta2',b'\x00\x00\xF4\x11eps',b'\x00\x00\xF4\x11eps_f',b'\x00\x00\xF4\x11eps_g'),(b'\x00\x00\x04\x28\x00\x00\x00\x02$2',b'\x00\x00\x22\x11m',b'\x00\x00\x22\x11n_iter',b'\x00\x00\x22\x11max_linesearch',b'\x00\x00\xF4\x11eps',b'\x00\x00\xF4\x11ftol',b'\x00\x00\xF4\x11wolfe',b'\x00\x00\xF4\x11min_step',b'\x00\x00\xF4\x11max_step',b'\x00\x04\x14\x11linesearch'),(b'\x00\x00\x04\x29\x00\x00\x00\x02$3',b'\x00\x00\x08\x11x',b'\x00\x00\x08\x11g1',b'\x00\x00\x08\x11g2',b'\x00\x00\x08\x11m',b'\x00\x00\x08\x11v',b'\x00\x00\x08\x11mh',b'\x00\x00\x08\x11vh',b'\x00\x00\x08\x11pf',b'\x00\x00\xF4\x11fx_best',b'\x00\x00\xF4\x11fx_prev',b'\x00\x00\x22\x11n_no_improvement'),(b'\x00\x00\x04\x2A\x00\x00\x00\x02$4',b'\x00\x00\x08\x11x',b'\x00\x00\x08\x11xp',b'\x00\x00\x08\x11g',b'\x00\x00\x08\x11gp',b'\x00\x00\x08\x11d',b'\x00\x00\x08\x11pf',b'\x00\x00\x08\x11lmal',b'\x00\x00\x08\x11lmys',b'\x00\x00\x08\x11lms',b'\x00\x00\x08\x11lmy',b'\x00\x00\xF4\x11fx_best',b'\x00\x00\xF4\x11step',b'\x00\x00\x22\x11j',b'\x00\x00\x22\x11k',b'\x00\x00\x22\x11end',b'\x00\x00\x22\x11n_no_improvement'),(b'\x00\x00\x03\xF7\x00\x00\x00\x03$__mbstate_t',b'\x00\x03\xFF\x11__mbstate8',b'\x00\x00\xDB\x11_mbstateL'),(b'\x00\x00\x03\xF8\x00\x00\x00\x02$block_q2_K',b'\x00\x04\x44\x11scales',b'\x00\x04\x48\x11qs',b'\x00\x00\x6C\x11d',b'\x00\x00\x6C\x11dmin'),(b'\x00\x00\x03\xF9\x00\x00\x00\x02$block_q3_K',b'\x00\x04\x46\x11hmask',b'\x00\x04\x48\x11qs',b'\x00\x04\x42\x11scales',b'\x00\x00\x6C\x11d'),(b'\x00\x00\x03\xFA\x00\x00\x00\x02$block_q4_K',b'\x00\x00\x6C\x11d',b'\x00\x00\x6C\x11dmin',b'\x00\x04\x42\x11scales',b'\x00\x04\x40\x11qs'),(b'\x00\x00\x03\xFB\x00\x00\x00\x02$block_q5_K',b'\x00\x00\x6C\x11d',b'\x00\x00\x6C\x11dmin',b'\x00\x04\x42\x11scales',b'\x00\x04\x46\x11qh',b'\x00\x04\x40\x11qs'),(b'\x00\x00\x03\xFC\x00\x00\x00\x02$block_q6_K',b'\x00\x04\x40\x11ql',b'\x00\x04\x48\x11qh',b'\x00\x04\x23\x11scales',b'\x00\x00\x6C\x11d'),(b'\x00\x00\x03\xFD\x00\x00\x00\x02$block_q8_K',b'\x00\x00\xF4\x11d',b'\x00\x04\x25\x11qs',b'\x00\x04\x21\x11bsums'),(b'\x00\x00\x04\x18\x00\x00\x00\x02$ggml_type_traits_t',b'\x00\x00\x0F\x11type_name',b'\x00\x00\x22\x11blck_size',b'\x00\x00\x11\x11type_size',b'\x00\x00\xB6\x11is_quantized',b'\x00\x04\x52\x11to_float',b'\x00\x04\x4F\x11from_float',b'\x00\x04\x4F\x11from_float_reference',b'\x00\x04\x50\x11vec_dot',b'\x00\x00\x01\x11vec_dot_type'),(b'\x00\x00\x04\x2C\x00\x00\x00\x02__darwin_pthread_handler_rec',b'\x00\x04\x51\x11__routine',b'\x00\x00\x10\x11__arg',b'\x00\x04\x2B\x11__next'),(b'\x00\x00\x03\xEF\x00\x00\x00\x02_opaque_pthread_attr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x0B\x11__opaque'),(b'\x00\x00\x03\xF0\x00\x00\x00\x02_opaque_pthread_cond_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x07\x11__opaque'),(b'\x00\x00\x03\xF1\x00\x00\x00\x02_opaque_pthread_condattr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x11\x11__opaque'),(b'\x00\x00\x03\xF2\x00\x00\x00\x02_opaque_pthread_mutex_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x0B\x11__opaque'),(b'\x00\x00\x03\xF3\x00\x00\x00\x02_opaque_pthread_mutexattr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x11\x11__opaque'),(b'\x00\x00\x03\xF4\x00\x00\x00\x02_opaque_pthread_once_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x11\x11__opaque'),(b'\x00\x00\x03\xF5\x00\x00\x00\x02_opaque_pthread_rwlock_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x03\x11__opaque'),(b'\x00\x00\x03\xF6\x00\x00\x00\x02_opaque_pthread_rwlockattr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x01\x11__opaque'),(b'\x00\x00\x04\x2E\x00\x00\x00\x02_opaque_pthread_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x2B\x11__cleanup_stack',b'\x00\x04\x0F\x11__opaque'),(b'\x00\x00\x04\x2F\x00\x00\x00\x10ggml_allocr',),(b'\x00\x00\x04\x30\x00\x00\x00\x02ggml_cgraph',b'\x00\x00\x22\x11n_nodes',b'\x00\x00\x22\x11n_leafs',b'\x00\x04\x39\x11nodes',b'\x00\x04\x39\x11grads',b'\x00\x04\x39\x11leafs',b'\x00\x04\x4D\x11visited_hash_table',b'\x00\x00\x22\x11perf_runs',b'\x00\x00\xDB\x11perf_cycles',b'\x00\x00\xDB\x11perf_time_us'),(b'\x00\x00\x04\x31\x00\x00\x00\x02ggml_compute_params',b'\x00\x04\x17\x11type',b'\x00\x00\x22\x11ith',b'\x00\x00\x22\x11nth',b'\x00\x00\x11\x11wsize',b'\x00\x00\x10\x11wdata'),(b'\x00\x00\x04\x32\x00\x00\x00\x10ggml_context',),(b'\x00\x00\x04\x33\x00\x00\x00\x02ggml_cplan',b'\x00\x00\x11\x11work_size',b'\x00\x04\x3F\x11work_data',b'\x00\x00\x22\x11n_threads',b'\x00\x04\x19\x11n_tasks',b'\x00\x03\xEE\x11abort_callback',b'\x00\x00\x10\x11abort_callback_data'),(b'\x00\x00\x00\xBC\x00\x00\x00\x02ggml_init_params',b'\x00\x00\x11\x11mem_size',b'\x00\x00\x10\x11mem_buffer',b'\x00\x00\xB6\x11no_alloc'),(b'\x00\x00\x04\x34\x00\x00\x00\x10ggml_metal_context',),(b'\x00\x00\x04\x35\x00\x00\x00\x10ggml_mpi_context',),(b'\x00\x00\x04\x37\x00\x00\x00\x02ggml_object',b'\x00\x00\x11\x11offs',b'\x00\x00\x11\x11size',b'\x00\x04\x36\x11next',b'\x00\x04\x15\x11type',b'\x00\x04\x09\x11padding'),(b'\x00\x00\x04\x38\x00\x00\x00\x02ggml_opt_context',b'\x00\x00\x0B\x11ctx',b'\x00\x00\x50\x11params',b'\x00\x00\x22\x11iter',b'\x00\x00\xDB\x11nx',b'\x00\x00\xB6\x11just_initialized',b'\x00\x04\x29\x11adam',b'\x00\x04\x2A\x11lbfgs'),(b'\x00\x00\x00\x50\x00\x00\x00\x02ggml_opt_params',b'\x00\x00\xC8\x11type',b'\x00\x00\x22\x11n_threads',b'\x00\x00\x22\x11past',b'\x00\x00\xF4\x11delta',b'\x00\x00\x22\x11max_no_improvement',b'\x00\x00\xB6\x11print_forward_graph',b'\x00\x00\xB6\x11print_backward_graph',b'\x00\x04\x27\x11adam',b'\x00\x04\x28\x11lbfgs'),(b'\x00\x00\x02\x48\x00\x00\x00\x02ggml_scratch',b'\x00\x00\x11\x11offs',b'\x00\x00\x11\x11size',b'\x00\x00\x10\x11data'),(b'\x00\x00\x04\x3D\x00\x00\x00\x02ggml_tensor',b'\x00\x00\x01\x11type',b'\x00\x04\x13\x11backend',b'\x00\x00\x22\x11n_dims',b'\x00\x04\x1E\x11ne',b'\x00\x04\x4B\x11nb',b'\x00\x00\x2E\x11op',b'\x00\x04\x1B\x11op_params',b'\x00\x00\xB6\x11is_param',b'\x00\x00\x08\x11grad',b'\x00\x04\x3B\x11src',b'\x00\x00\x22\x11perf_runs',b'\x00\x00\xDB\x11perf_cycles',b'\x00\x00\xDB\x11perf_time_us',b'\x00\x00\x10\x11data',b'\x00\x04\x0D\x11name',b'\x00\x00\x10\x11extra',b'\x00\x04\x09\x11padding'),(b'\x00\x00\x04\x3E\x00\x00\x00\x10gguf_context',),(b'\x00\x00\x02\x24\x00\x00\x00\x02gguf_init_params',b'\x00\x00\xB6\x11no_alloc',b'\x00\x00\xB0\x11ctx')),
+
+https://github.com/bingoogolapple/BGAQRCode-Android
+- zbar/src/main/jni/config.h:59 /* Define to 1 if you have the `pthread' library (-lpthread). */
+- zbar/src/main/jni/zbar/mutex.h:103 # include <pthread.h>
+- zbar/src/main/jni/zbar/event.h:43 #  include <pthread.h>
+- zbar/src/main/jni/libiconv-1.15/srcm4/lock.m4:13     # OSF/1 4.0 and Mac OS X 10.1 lack the pthread_rwlock_t type and the
+- zbar/src/main/jni/zbar/thread.h:44 # include <pthread.h>
+
+https://github.com/Klipper3d/klipper
+- src/linux/sensor_ds18b20.c:12 #include <pthread.h> // pthread_create
+- klippy/chelper/trdispatch.c:7 #include <pthread.h> // pthread_mutex_lock
+- lib/hidflash/hid-mac.c:31 #include <pthread.h>
+- klippy/chelper/serialqueue.c:17 #include <pthread.h> // pthread_mutex_lock
+- lib/hidflash/hid-libusb.c:43 #include <pthread.h>
+
+https://github.com/Wind4/vlmcsd
+- src/shared_globals.c:141 pthread_mutex_t logmutex = PTHREAD_MUTEX_INITIALIZER;
+- src/kms.c:174 pthread_mutex_t* mutex;
+- src/types.h:36 #include <pthread.h>
+- src/shared_globals.h:20 #include <pthread.h>
+- src/GNUmakefile:338     SERVERLDFLAGS += -lpthread
+
+https://github.com/wazuh/wazuh
+- src/shared/pthreads_op.c:13 #include <pthread.h>
+- src/headers/pthreads_op.h:19 #define w_mutex_init(x, y) { int error = pthread_mutex_init(x, y); if (error) merror_exit("At pthread_mutex_init(): %s", strerror(error)); }
+- framework/Makefile:12 THREAD_FLAGS = -pthread
+- src/wazuh_db/main.c:30 static pthread_mutex_t queue_mutex = PTHREAD_MUTEX_INITIALIZER;
+- src/remoted/queue.c:16 static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+

@@ -15,8 +15,8 @@ def get_rate_limit_from_headers(headers):
 def wait_for_rate_limit_reset(reset_time):
     wait_time = reset_time - time.time()
     if wait_time > 0:
-        print(f"at {time.strftime('%H:%M:%S', time.localtime())}\n")
         print(f"Rate limit exceeded. Sleeping for {wait_time} seconds")
+        print(f"at {time.strftime('%H:%M:%S', time.localtime())}\n")
         time.sleep(wait_time + 1)
 
 api_call_counter = 0
