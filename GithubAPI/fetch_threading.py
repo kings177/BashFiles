@@ -14,9 +14,9 @@ def get_rate_limit_from_headers(headers):
 def wait_for_rate_limit_reset(reset_time):
     wait_time = reset_time - time.time()
     if wait_time > 0:
-        print(f"Rate limit exceeded. Sleeping for {wait_time} seconds")
+        print(f"at {time.strftime('%H:%M:%S', time.localtime())}\n")
+        print(f"Rate limit exceeded. Sleeping for {wait_time} seconds\n")
         time.sleep(wait_time + 10)
-
 
 api_call_counter = 0
 
@@ -32,7 +32,6 @@ def search_in_repo(repo_url, keyword, api_token):
     response = requests.get(url, headers=headers)
 
     remaining, reset = get_rate_limit_from_headers(response.headers)
-    print(f"Rate limit status (from header): {remaining} requests remaining")
     if remaining <= 1:
         wait_for_rate_limit_reset(reset)
 
@@ -56,12 +55,13 @@ def analyze_repositories(language, threading_keyword, api_token):
 
     return count, found_repos
 
-api_token = ''
+api_token = 'YOUR_TOKEN'
 threading_keywords = {
     'Python': 'threading',
     'Rust': 'std::thread',
     'C': 'pthread',
-    'JavaScript': "worker_threads)"
+    'JavaScript': "workers",
+    'C++': 'pthread',
 }
 
 result = {}
@@ -78,4 +78,3 @@ for language, keyword in threading_keywords.items():
             file.write(repo + '\n')
 
     print(f"Results for {language} saved to {filename}")
-

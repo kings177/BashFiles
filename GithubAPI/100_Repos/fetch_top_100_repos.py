@@ -2,7 +2,7 @@ import requests
 import time
 import json
 
-def fetch_repos(language, api_token, max_repos=1000):
+def fetch_repos(language, api_token, max_repos=100):
     repos = []
     page = 1
     headers = {'Authorization': f'token {api_token}'}
@@ -22,7 +22,7 @@ def fetch_repos(language, api_token, max_repos=1000):
             break
 
         page += 1
-        time.sleep(10) # rate limited sleep
+        time.sleep(1) # rate limited sleep
 
         if len(repos) >= max_repos:
             print(f"Fetched {len(repos)} repos for {language}")
@@ -31,11 +31,11 @@ def fetch_repos(language, api_token, max_repos=1000):
     return repos
 
 def save_repos_to_file(repos, language):
-    with open(f'./jsons/{language}_repos.json', 'w') as file:
+    with open(f'./jsons/{language}_100_repos.json', 'w') as file:
         json.dump(repos, file, indent=4)
 
-api_token= 'YOUR_TOKEN'
-languages = ['Python', 'Rust', 'JavaScript' 'C', 'C++']
+api_token= 'YOUR_TOKEN' # make it a env-var if you want
+languages = ['C', 'C++'] # Just C/C++ cuz... yeah!
 
 for language in languages:
     print(f"Fetching top repos for {language}")

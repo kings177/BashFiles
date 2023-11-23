@@ -1,0 +1,400 @@
+https://github.com/netdata/netdata
+- build/m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- build/m4/ax_pthread.m4:40 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- build/m4/ax_pthread.m4:52 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- build/m4/ax_pthread.m4:98 ax_pthread_ok=no
+- build/m4/ax_pthread.m4:100 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/ventoy/Ventoy
+- ExFAT/buidexfat.sh:32 ./configure --prefix="$CUR" CFLAGS='-static -O2 -D_FILE_OFFSET_BITS=64' FUSE_CFLAGS="-I$CUR/LIBFUSE/include/" FUSE_LIBS="$CUR/LIBFUSE/lib/libfuse.a -pthread $opt -ldl"
+- ExFAT/buidexfat.sh:50 ./configure --prefix="$CUR" CFLAGS='-O2 -D_FILE_OFFSET_BITS=64' FUSE_CFLAGS="-I$CUR/LIBFUSE/include/" FUSE_LIBS="$CUR/LIBFUSE/lib/libfuse.a -lpthread -ldl $opt"
+- LinuxGUI/build.sh:43         -l pthread \
+- Plugson/src/Core/ventoy_log.c:30 static pthread_mutex_t g_log_mutex;
+- Plugson/src/Core/ventoy_log.c:43     pthread_mutex_init(&g_log_mutex, NULL);
+
+https://github.com/obsproject/obs-studio
+- libobs/obs-view.c:26 	pthread_mutex_init_value(&view->channels_mutex);
+- libobs/obs-view.c:28 	if (pthread_mutex_init(&view->channels_mutex, NULL) != 0) {
+- libobs/obs-view.c:62 	pthread_mutex_destroy(&view->channels_mutex);
+- libobs/obs-view.c:83 	pthread_mutex_lock(&view->channels_mutex);
+- libobs/obs-view.c:85 	pthread_mutex_unlock(&view->channels_mutex);
+
+https://github.com/ggerganov/llama.cpp
+- README.md:128 I CFLAGS:   -I.            -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -pthread -DGGML_USE_K_QUANTS -DGGML_USE_ACCELERATE
+- README.md:129 I CXXFLAGS: -I. -I./common -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -DGGML_USE_K_QUANTS
+- Makefile:250 	MK_CFLAGS   += -pthread
+- Makefile:251 	MK_CXXFLAGS += -pthread
+- Makefile:391 	MK_LDFLAGS   += -lcublas -lculibos -lcudart -lcublasLt -lpthread -ldl -lrt -L/usr/local/cuda/lib64 -L/opt/cuda/lib64 -L$(CUDA_PATH)/targets/x86_64-linux/lib
+
+https://github.com/FFmpeg/FFmpeg
+- libavcodec/pthread.c:36 #include "pthread_internal.h"
+- libavcodec/pthread.c:91 av_cold void ff_pthread_free(void *obj, const unsigned offsets[])
+- libavcodec/pthread.c:99         pthread_mutex_destroy((pthread_mutex_t*)((char*)obj + *cur_offset));
+- libavcodec/pthread.c:101         pthread_cond_destroy ((pthread_cond_t *)((char*)obj + *cur_offset));
+- libavcodec/pthread.c:104 av_cold int ff_pthread_init(void *obj, const unsigned offsets[])
+
+https://github.com/php/php-src
+- TSRM/TSRM.h:49 # include <pthread.h>
+- TSRM/TSRM.h:67 # define THREAD_T pthread_t
+- TSRM/TSRM.h:68 # define MUTEX_T pthread_mutex_t *
+- TSRM/threads.m4:67 #include <pthread.h>
+- TSRM/threads.m4:75     pthread_t thd;
+
+https://github.com/wg/wrk
+- src/ssl.c:3 #include <pthread.h>
+- src/atomicvar.h:16  *  pthread_mutex_t myvar_mutex;
+- src/atomicvar.h:60 #include <pthread.h>
+- src/atomicvar.h:102 /* Implementation using pthread mutex. */
+- src/atomicvar.h:105     pthread_mutex_lock(&var ## _mutex); \
+
+https://github.com/curl/curl
+- lib/easy_lock.h:98 #include <pthread.h>
+- lib/easy_lock.h:100 #define curl_simple_lock pthread_mutex_t
+- lib/easy_lock.h:102 #define curl_simple_lock_lock(m) pthread_mutex_lock(m)
+- lib/easy_lock.h:103 #define curl_simple_lock_unlock(m) pthread_mutex_unlock(m)
+- lib/curl_threads.h:30 #  define curl_mutex_t           pthread_mutex_t
+
+https://github.com/bilibili/ijkplayer
+- ijkmedia/ijksdl/ijksdl_mutex.h:29 #include <pthread.h>
+- ijkmedia/ijksdl/ijksdl_mutex.h:35     pthread_mutex_t id;
+- ijkmedia/ijksdl/ijksdl_mutex.h:45     pthread_cond_t id;
+- ijkmedia/ijksdl/ijksdl_mutex.c:38     if (pthread_mutex_init(&mutex->id, NULL) != 0) {
+- ijkmedia/ijksdl/ijksdl_mutex.c:49         pthread_mutex_destroy(&mutex->id);
+
+https://github.com/jqlang/jq
+- m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- m4/ax_pthread.m4:40 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- m4/ax_pthread.m4:52 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- m4/ax_pthread.m4:98 ax_pthread_ok=no
+- m4/ax_pthread.m4:100 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/ggerganov/whisper.cpp
+- Makefile:98 	CFLAGS   += -pthread
+- Makefile:99 	CXXFLAGS += -pthread
+- Makefile:209 	LDFLAGS     += -lcublas -lculibos -lcudart -lcublasLt -lpthread -ldl -lrt -L/usr/local/cuda/lib64 -L/opt/cuda/lib64 -L$(CUDA_PATH)/targets/$(UNAME_M)-linux/lib
+- examples/server/httplib.h:195 #include <pthread.h>
+
+https://github.com/ggreer/the_silver_searcher
+- m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- m4/ax_pthread.m4:36 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- m4/ax_pthread.m4:48 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- m4/ax_pthread.m4:91 ax_pthread_ok=no
+- m4/ax_pthread.m4:93 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/pjreddie/darknet
+- src/demo.c:199     pthread_t detect_thread;
+- src/demo.c:200     pthread_t fetch_thread;
+- src/demo.c:237         if(pthread_create(&fetch_thread, 0, fetch_in_thread, 0)) error("Thread creation failed");
+- src/demo.c:238         if(pthread_create(&detect_thread, 0, detect_in_thread, 0)) error("Thread creation failed");
+- src/demo.c:248         pthread_join(fetch_thread, 0);
+
+https://github.com/openssl/openssl
+- crypto/threads_pthread.c:50     if ((lock = CRYPTO_zalloc(sizeof(pthread_rwlock_t), NULL, 0)) == NULL)
+- crypto/threads_pthread.c:54     if (pthread_rwlock_init(lock, NULL) != 0) {
+- crypto/threads_pthread.c:59     pthread_mutexattr_t attr;
+- crypto/threads_pthread.c:62     if ((lock = CRYPTO_zalloc(sizeof(pthread_mutex_t), NULL, 0)) == NULL)
+- crypto/threads_pthread.c:69     pthread_mutexattr_init(&attr);
+
+https://github.com/robertdavidgraham/masscan
+- src/pixie-threads.c:11 #include <pthread.h>
+- src/pixie-threads.c:41     pthread_t thread = pthread_self();
+- src/pixie-threads.c:42     pthread_attr_t thAttr;
+- src/pixie-threads.c:46     pthread_attr_init(&thAttr);
+- src/pixie-threads.c:47     pthread_attr_getschedpolicy(&thAttr, &policy);
+
+https://github.com/arendst/Tasmota
+- lib/lib_rf/RF24/utility/RPi/spi.cpp:2 #include <pthread.h>
+- lib/lib_rf/RF24/utility/RPi/spi.cpp:5 static pthread_mutex_t spiMutex = PTHREAD_MUTEX_INITIALIZER;
+- lib/lib_rf/RF24/utility/RPi/spi.cpp:26 	pthread_mutex_lock (&spiMutex);
+- lib/lib_rf/RF24/utility/RPi/spi.cpp:33 	pthread_mutex_unlock (&spiMutex);
+- lib/lib_rf/RF24/utility/RPi/interrupt.c:22 #include <pthread.h>
+
+https://github.com/koekeishiya/yabai
+- src/manifest.m:30 #include <pthread.h>
+- src/event_loop.h:66     pthread_t thread;
+- src/osax/loader.m:31 "\x48\xB8"                         // movabs     rax, pthread_create_from_mach_thread
+- src/osax/loader.m:64 "\x49\x01\x00\x10"                 // adr        x9, #0x28 ; pthread_create_from_mach_thread
+- src/osax/loader.m:163     uint64_t pcfmt_address = (uint64_t) dlsym(RTLD_DEFAULT, "pthread_create_from_mach_thread");
+
+https://github.com/iovisor/bcc
+- tools/tplist_example.txt:36 $ tplist -l pthread     # list probes in libpthread
+- tools/tplist_example.txt:37 /lib64/libpthread.so.0 libpthread:pthread_start
+- tools/tplist_example.txt:38 /lib64/libpthread.so.0 libpthread:pthread_create
+- tools/tplist_example.txt:39 /lib64/libpthread.so.0 libpthread:pthread_join
+- tools/tplist_example.txt:40 /lib64/libpthread.so.0 libpthread:pthread_join_ret
+
+https://github.com/kingToolbox/WindTerm
+- src/libssh/src/threads/pthread.c:28 #include <pthread.h>
+- src/libssh/src/threads/pthread.c:30 static int ssh_pthread_mutex_init (void **mutex)
+- src/libssh/src/threads/pthread.c:38     *mutex = malloc(sizeof(pthread_mutex_t));
+- src/libssh/src/threads/pthread.c:43     rc = pthread_mutex_init ((pthread_mutex_t *)*mutex, NULL);
+- src/libssh/src/threads/pthread.c:52 static int ssh_pthread_mutex_destroy (void **mutex)
+
+https://github.com/jarun/nnn
+- src/nnn.c:84 #include <pthread.h>
+- src/nnn.c:480 /* pthread related */
+- src/nnn.c:487 static pthread_mutex_t running_mutex = PTHREAD_MUTEX_INITIALIZER;
+- src/nnn.c:488 static pthread_mutex_t hardlink_mutex = PTHREAD_MUTEX_INITIALIZER;
+- src/nnn.c:926 	pthread_mutex_lock(&hardlink_mutex);
+
+https://github.com/allinurl/goaccess
+- src/ui.h:44 #include <pthread.h>
+- src/ui.h:195   pthread_mutex_t mutex;
+- src/ui.h:196   pthread_t thread;
+- configure.ac:28 # pthread
+- configure.ac:29 AC_CHECK_LIB([pthread], [pthread_create], [], [AC_MSG_ERROR([pthread is missing])])
+
+https://github.com/openwrt/openwrt
+- toolchain/gcc/patches-11.x/701-riscv-linux-Don-t-add-latomic-with-pthread.patch:4 Subject: [PATCH] riscv/linux: Don't add -latomic with -pthread
+- toolchain/gcc/patches-11.x/701-riscv-linux-Don-t-add-latomic-with-pthread.patch:10 The use of atomic operations is also independent of the use of libpthread.
+- toolchain/gcc/patches-11.x/701-riscv-linux-Don-t-add-latomic-with-pthread.patch:29 -  " %{pthread:" LD_AS_NEEDED_OPTION " -latomic " LD_NO_AS_NEEDED_OPTION "}"
+- toolchain/gcc/patches-11.x/701-riscv-linux-Don-t-add-latomic-with-pthread.patch:36  #define CPP_SPEC "%{pthread:-D_REENTRANT}"
+- include/site/linux:32 ac_cv_func_pthread_key_delete=yes
+
+https://github.com/ish-app/ish
+- util/sync.c:9     pthread_condattr_t attr;
+- util/sync.c:10     pthread_condattr_init(&attr);
+- util/sync.c:12     pthread_condattr_setclock(&attr, CLOCK_MONOTONIC);
+- util/sync.c:14     pthread_cond_init(&cond->cond, &attr);
+- util/sync.c:17     pthread_cond_destroy(&cond->cond);
+
+https://github.com/postgres/postgres
+- config/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- config/ax_pthread.m4:36 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- config/ax_pthread.m4:48 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- config/ax_pthread.m4:93 ax_pthread_ok=no
+- config/ax_pthread.m4:95 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/reactos/reactos
+- sdk/include/c++/stlport/pthread.h:24 #  include "/usr/include/pthread.h"
+- sdk/include/c++/stlport/pthread.h:27 #    include_next <pthread.h>
+- sdk/include/c++/stlport/pthread.h:29 #    include _STLP_NATIVE_C_HEADER(pthread.h)
+- sdk/include/c++/stlport/pthread_alloc:38 # include <stl/_pthread_alloc.h>
+- sdk/include/c++/stlport/stl/_pthread_alloc.h:93 typedef _STLP_PRIV _Pthread_alloc __pthread_alloc;
+
+https://github.com/swaywm/sway
+- sway/realtime.c:4 #include <pthread.h>
+- sway/realtime.c:13 	int ret = pthread_setschedparam(pthread_self(), SCHED_OTHER, &param);
+- sway/realtime.c:25 	ret = pthread_getschedparam(pthread_self(), &old_policy, &param);
+- sway/realtime.c:33 	ret = pthread_setschedparam(pthread_self(), SCHED_RR, &param);
+- sway/realtime.c:39 	pthread_atfork(NULL, NULL, child_fork_callback);
+
+https://github.com/jart/cosmopolitan
+- libc/intrin/pthread_tid.c:23 int _pthread_tid(struct PosixThread *pt) {
+- libc/intrin/pthread_tid.c:26     pthread_pause_np();
+- libc/calls/pthread_yield.c:30 int pthread_yield(void) {
+- libc/calls/pthread_yield.c:32     __syslib->__pthread_yield_np();
+- libc/calls/pthread_yield.c:34     pthread_pause_np();  // sched_yield() is punishingly slow on OpenBSD
+
+https://github.com/videolan/vlc
+- contrib/src/pthread-stubs/rules.mak:2 PTHREAD_STUBS_URL := https://xcb.freedesktop.org/dist/libpthread-stubs-$(PTHREAD_STUBS_VERSION).tar.bz2
+- contrib/src/pthread-stubs/rules.mak:4 $(TARBALLS)/libpthread-stubs-$(PTHREAD_STUBS_VERSION).tar.bz2:
+- contrib/src/pthread-stubs/rules.mak:5 	$(call download_pkg,$(PTHREAD_STUBS_URL),pthreads)
+- contrib/src/pthread-stubs/rules.mak:7 .sum-pthread-stubs: libpthread-stubs-$(PTHREAD_STUBS_VERSION).tar.bz2
+- contrib/src/pthread-stubs/rules.mak:9 libpthread-stubs: libpthread-stubs-$(PTHREAD_STUBS_VERSION).tar.bz2 .sum-pthread-stubs
+
+https://github.com/ffmpegwasm/ffmpeg.wasm
+- Makefile:3 MT_FLAGS := -sUSE_PTHREADS -pthread
+- build/libvpx.sh:14   --extra-cflags="$CFLAGS"                           # flags to use pthread and code optimization
+- build/libvpx.sh:15   --extra-cxxflags="$CXXFLAGS"                       # flags to use pthread and code optimization
+- build/harfbuzz.sh:7 # A hacky way to disable pthread
+- build/harfbuzz.sh:9   sed -i 's#\[have_pthread=true\]#\[have_pthread=false\]#g' configure.ac
+
+https://github.com/systemd/systemd
+- src/basic/pthread-util.h:4 #include <pthread.h>
+- src/basic/pthread-util.h:8 static inline pthread_mutex_t* pthread_mutex_lock_assert(pthread_mutex_t *mutex) {
+- src/basic/pthread-util.h:9         assert_se(pthread_mutex_lock(mutex) == 0);
+- src/basic/pthread-util.h:13 static inline void pthread_mutex_unlock_assertp(pthread_mutex_t **mutexp) {
+- src/basic/pthread-util.h:15                 assert_se(pthread_mutex_unlock(*mutexp) == 0);
+
+https://github.com/openresty/openresty
+- util/package-win32.sh:30     cp $mingw32/bin/libwinpthread-1.dll $name/ || exit 1
+
+https://github.com/sumatrapdfreader/sumatrapdf
+- ext/lcms2/m4/acx_pthread.m4:1 ##### http://autoconf-archive.cryp.to/acx_pthread.html
+- ext/lcms2/m4/acx_pthread.m4:44 #   (with help from M. Frigo), as well as ac_pthread and hb_pthread
+- ext/lcms2/m4/acx_pthread.m4:91 acx_pthread_ok=no
+- ext/lcms2/m4/acx_pthread.m4:93 # We used to check for pthread.h first, but this fails if pthread.h
+- ext/lcms2/m4/acx_pthread.m4:105         AC_MSG_CHECKING([for pthread_join in LIBS=$PTHREAD_LIBS with CFLAGS=$PTHREAD_CFLAGS])
+
+https://github.com/haiwen/seafile
+- common/log.c:7 #include <pthread.h>
+- common/log.c:250 static pthread_mutex_t event_lock = PTHREAD_MUTEX_INITIALIZER;
+- common/log.c:292     pthread_mutex_lock (&event_lock);
+- common/log.c:298     pthread_mutex_unlock (&event_lock);
+- configure.ac:80 AC_CHECK_LIB(pthread, pthread_create, [echo "found library pthread"], AC_MSG_ERROR([*** Unable to find pthread library]), )
+
+https://github.com/EZLippi/Tinyhttpd
+- httpd.c:9  *  1) Comment out the #include <pthread.h> line.
+- httpd.c:11  *  3) Comment out the two lines that run pthread_create().
+- httpd.c:25 #include <pthread.h>
+- httpd.c:496     pthread_t newthread;
+- httpd.c:509         if (pthread_create(&newthread , NULL, (void *)accept_request, (void *)(intptr_t)client_sock) != 0)
+
+https://github.com/audacity/audacity
+- lib-src/lv2/sord/wscript:65         if conf.check(cflags=['-pthread'], mandatory=False):
+- lib-src/lv2/sord/wscript:66             conf.env.PTHREAD_CFLAGS    = ['-pthread']
+- lib-src/lv2/sord/wscript:68                 conf.env.PTHREAD_LINKFLAGS = ['-pthread']
+- lib-src/lv2/sord/wscript:69         elif conf.check(linkflags=['-lpthread'], mandatory=False):
+- lib-src/lv2/sord/wscript:71             conf.env.PTHREAD_LINKFLAGS = ['-lpthread']
+
+https://github.com/libevent/libevent
+- evthread_pthread.c:32 #include <pthread.h>
+- evthread_pthread.c:42 static pthread_mutexattr_t attr_default;
+- evthread_pthread.c:43 static pthread_mutexattr_t attr_recursive;
+- evthread_pthread.c:45 static pthread_mutex_t once_init_lock = PTHREAD_MUTEX_INITIALIZER;
+- evthread_pthread.c:51 	pthread_mutexattr_t *attr = &attr_default;
+
+https://github.com/ImageMagick/ImageMagick
+- m4/ax_pthread.m4:2 #        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- m4/ax_pthread.m4:40 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- m4/ax_pthread.m4:52 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- m4/ax_pthread.m4:98 ax_pthread_ok=no
+- m4/ax_pthread.m4:100 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/cesanta/mongoose
+- examples/multi-threaded/main.c:23 #include <pthread.h>
+- examples/multi-threaded/main.c:24   pthread_t thread_id = (pthread_t) 0;
+- examples/multi-threaded/main.c:25   pthread_attr_t attr;
+- examples/multi-threaded/main.c:26   (void) pthread_attr_init(&attr);
+- examples/multi-threaded/main.c:27   (void) pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+
+https://github.com/coturn/coturn
+- src/apps/relay/ns_sm.h:40 #include <pthread.h>
+- src/apps/common/ns_turn_utils.c:39 #include <pthread.h>
+- src/apps/common/ns_turn_utils.c:85     ret = pthread_mutex_lock((pthread_mutex_t *)mutex->mutex);
+- src/apps/common/ns_turn_utils.c:99     ret = pthread_mutex_unlock((pthread_mutex_t *)mutex->mutex);
+- src/apps/common/ns_turn_utils.c:113     mutex->mutex = malloc(sizeof(pthread_mutex_t));
+
+https://github.com/Tencent/wcdb
+- android/jni/Mutex.h:20 #include <pthread.h>
+- android/jni/Mutex.h:74     pthread_mutex_t mMutex;
+- android/jni/Mutex.h:81     pthread_mutex_init(&mMutex, NULL);
+- android/jni/Mutex.h:86     pthread_mutex_init(&mMutex, NULL);
+- android/jni/Mutex.h:92         pthread_mutexattr_t attr;
+
+https://github.com/huangz1990/redis-3.0-annotated
+- src/bio.c:90 static pthread_t bio_threads[REDIS_BIO_NUM_OPS];
+- src/bio.c:91 static pthread_mutex_t bio_mutex[REDIS_BIO_NUM_OPS];
+- src/bio.c:92 static pthread_cond_t bio_condvar[REDIS_BIO_NUM_OPS];
+- src/bio.c:140     pthread_attr_t attr;
+- src/bio.c:141     pthread_t thread;
+
+https://github.com/cockpit-project/cockpit
+- src/tls/server.c:28 #include <pthread.h>
+- src/tls/server.c:51   pthread_mutex_t connection_mutex;
+- src/tls/server.c:96     pthread_mutex_lock (&server.connection_mutex);
+- src/tls/server.c:108     pthread_mutex_unlock (&server.connection_mutex);
+- src/tls/server.c:123   pthread_attr_t attr;
+
+https://github.com/OpenVPN/openvpn
+- src/openvpn/errlevel.h:181 /*#define D_THREAD_DEBUG       LOGLEV(4, 70, M_DEBUG)*/  /* show pthread debug information */
+
+https://github.com/leandromoreira/ffmpeg-libav-tutorial
+- Dockerfile:398         DIR=/tmp/libpthread-stubs && \
+- Dockerfile:401         curl -sLO https://xcb.freedesktop.org/dist/libpthread-stubs-${LIBPTHREAD_STUBS_VERSION}.tar.gz && \
+- Dockerfile:402         tar -zx --strip-components=1 -f libpthread-stubs-${LIBPTHREAD_STUBS_VERSION}.tar.gz && \
+- Dockerfile:557         --extra-libs=-lpthread \
+
+https://github.com/torch/torch7
+- lib/TH/THAtomic.c:18 #include <pthread.h>
+- lib/TH/THAtomic.c:19 static pthread_mutex_t ptm = PTHREAD_MUTEX_INITIALIZER;
+- lib/TH/THAtomic.c:91   pthread_mutex_lock(&ptm);
+- lib/TH/THAtomic.c:96   pthread_mutex_unlock(&ptm);
+- lib/TH/THAtomic.c:165   pthread_mutex_lock(&ptm);
+
+https://github.com/irungentoo/toxcore
+- m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- m4/ax_pthread.m4:36 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- m4/ax_pthread.m4:48 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- m4/ax_pthread.m4:91 ax_pthread_ok=no
+- m4/ax_pthread.m4:93 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/libretro/RetroArch
+- libretro-common/rthreads/gx_pthread.h:4  * The following license statement only applies to this file (gx_pthread.h).
+- libretro-common/rthreads/gx_pthread.h:85 typedef OSThread pthread_t;
+- libretro-common/rthreads/gx_pthread.h:86 typedef mutex_t pthread_mutex_t;
+- libretro-common/rthreads/gx_pthread.h:87 typedef OSCond pthread_cond_t;
+- libretro-common/rthreads/gx_pthread.h:90 typedef void* pthread_mutexattr_t;
+
+https://github.com/openwall/john
+- src/m4/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/m4/ax_pthread.m4:36 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- src/m4/ax_pthread.m4:48 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- src/m4/ax_pthread.m4:91 ax_pthread_ok=no
+- src/m4/ax_pthread.m4:93 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/gcc-mirror/gcc
+- gcc/config/i386/mingw-pthread.h:1 /* Defines that pthread library shall be enabled by default
+- libgcc/config/i386/t-mingw-pthread:1 SHLIB_PTHREAD_CFLAG = -pthread
+- libgcc/config/i386/t-mingw-pthread:2 SHLIB_PTHREAD_LDFLAG = -Wl,-lpthread
+- gcc/testsuite/gcc.dg/pthread-init-2.c:2  * pthread initialization macros when __STDC__ is defined.
+- gcc/testsuite/gcc.dg/pthread-init-2.c:8 /* { dg-require-effective-target pthread_h } */
+
+https://github.com/yugabyte/yugabyte-db
+- src/postgres/config/ax_pthread.m4:2 #        http://www.gnu.org/software/autoconf-archive/ax_pthread.html
+- src/postgres/config/ax_pthread.m4:36 #   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+- src/postgres/config/ax_pthread.m4:48 #   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+- src/postgres/config/ax_pthread.m4:92 ax_pthread_ok=no
+- src/postgres/config/ax_pthread.m4:94 # We used to check for pthread.h first, but this fails if pthread.h
+
+https://github.com/rui314/chibicc
+- Makefile:18 	$(CC) -pthread -o $@ test/$*.o -xc test/common
+- Makefile:38 	$(CC) -pthread -o $@ stage2/test/$*.o -xc test/common
+- test/tls.c:3 #include <pthread.h>
+- test/tls.c:26   pthread_t thr;
+- test/tls.c:32   ASSERT(0, pthread_create(&thr, NULL, thread_main, NULL));
+
+https://github.com/darktable-org/darktable
+- src/common/dtpthread.c:25 #include <pthread.h>
+- src/common/dtpthread.c:34 int dt_pthread_create(pthread_t *thread, void *(*start_routine)(void *), void *arg)
+- src/common/dtpthread.c:38   pthread_attr_t attr;
+- src/common/dtpthread.c:40   ret = pthread_attr_init(&attr);
+- src/common/dtpthread.c:43     fprintf(stderr, "[dt_pthread_create] error: pthread_attr_init() returned %i\n", ret);
+
+https://github.com/Cyan4973/xxHash
+- tests/collisions/pool.c:38 #include "threading.h"   /* pthread adaptation */
+- tests/collisions/pool.c:48     ZSTD_pthread_t* threads;
+- tests/collisions/pool.c:64     ZSTD_pthread_mutex_t queueMutex;
+- tests/collisions/pool.c:66     ZSTD_pthread_cond_t queuePushCond;
+- tests/collisions/pool.c:68     ZSTD_pthread_cond_t queuePopCond;
+
+https://github.com/tporadowski/redis
+- src/Win32_Interop/Win32_PThread.h:19 /* threads avoiding pthread.h */
+- src/Win32_Interop/Win32_PThread.h:20 #define pthread_mutex_t CRITICAL_SECTION
+- src/Win32_Interop/Win32_PThread.h:21 #define pthread_attr_t ssize_t
+- src/Win32_Interop/Win32_PThread.h:23 #define pthread_mutex_init(a,b) (InitializeCriticalSectionAndSpinCount((a), 0x80000400),0)
+- src/Win32_Interop/Win32_PThread.h:24 #define pthread_mutex_destroy(a) DeleteCriticalSection((a))
+
+https://github.com/ggerganov/ggml
+- examples/python/ggml/cffi.py:8     _struct_unions = ((b'\x00\x00\x04\x27\x00\x00\x00\x02$1',b'\x00\x00\x22\x11n_iter',b'\x00\x00\xF4\x11sched',b'\x00\x00\xF4\x11decay',b'\x00\x00\xF4\x11alpha',b'\x00\x00\xF4\x11beta1',b'\x00\x00\xF4\x11beta2',b'\x00\x00\xF4\x11eps',b'\x00\x00\xF4\x11eps_f',b'\x00\x00\xF4\x11eps_g'),(b'\x00\x00\x04\x28\x00\x00\x00\x02$2',b'\x00\x00\x22\x11m',b'\x00\x00\x22\x11n_iter',b'\x00\x00\x22\x11max_linesearch',b'\x00\x00\xF4\x11eps',b'\x00\x00\xF4\x11ftol',b'\x00\x00\xF4\x11wolfe',b'\x00\x00\xF4\x11min_step',b'\x00\x00\xF4\x11max_step',b'\x00\x04\x14\x11linesearch'),(b'\x00\x00\x04\x29\x00\x00\x00\x02$3',b'\x00\x00\x08\x11x',b'\x00\x00\x08\x11g1',b'\x00\x00\x08\x11g2',b'\x00\x00\x08\x11m',b'\x00\x00\x08\x11v',b'\x00\x00\x08\x11mh',b'\x00\x00\x08\x11vh',b'\x00\x00\x08\x11pf',b'\x00\x00\xF4\x11fx_best',b'\x00\x00\xF4\x11fx_prev',b'\x00\x00\x22\x11n_no_improvement'),(b'\x00\x00\x04\x2A\x00\x00\x00\x02$4',b'\x00\x00\x08\x11x',b'\x00\x00\x08\x11xp',b'\x00\x00\x08\x11g',b'\x00\x00\x08\x11gp',b'\x00\x00\x08\x11d',b'\x00\x00\x08\x11pf',b'\x00\x00\x08\x11lmal',b'\x00\x00\x08\x11lmys',b'\x00\x00\x08\x11lms',b'\x00\x00\x08\x11lmy',b'\x00\x00\xF4\x11fx_best',b'\x00\x00\xF4\x11step',b'\x00\x00\x22\x11j',b'\x00\x00\x22\x11k',b'\x00\x00\x22\x11end',b'\x00\x00\x22\x11n_no_improvement'),(b'\x00\x00\x03\xF7\x00\x00\x00\x03$__mbstate_t',b'\x00\x03\xFF\x11__mbstate8',b'\x00\x00\xDB\x11_mbstateL'),(b'\x00\x00\x03\xF8\x00\x00\x00\x02$block_q2_K',b'\x00\x04\x44\x11scales',b'\x00\x04\x48\x11qs',b'\x00\x00\x6C\x11d',b'\x00\x00\x6C\x11dmin'),(b'\x00\x00\x03\xF9\x00\x00\x00\x02$block_q3_K',b'\x00\x04\x46\x11hmask',b'\x00\x04\x48\x11qs',b'\x00\x04\x42\x11scales',b'\x00\x00\x6C\x11d'),(b'\x00\x00\x03\xFA\x00\x00\x00\x02$block_q4_K',b'\x00\x00\x6C\x11d',b'\x00\x00\x6C\x11dmin',b'\x00\x04\x42\x11scales',b'\x00\x04\x40\x11qs'),(b'\x00\x00\x03\xFB\x00\x00\x00\x02$block_q5_K',b'\x00\x00\x6C\x11d',b'\x00\x00\x6C\x11dmin',b'\x00\x04\x42\x11scales',b'\x00\x04\x46\x11qh',b'\x00\x04\x40\x11qs'),(b'\x00\x00\x03\xFC\x00\x00\x00\x02$block_q6_K',b'\x00\x04\x40\x11ql',b'\x00\x04\x48\x11qh',b'\x00\x04\x23\x11scales',b'\x00\x00\x6C\x11d'),(b'\x00\x00\x03\xFD\x00\x00\x00\x02$block_q8_K',b'\x00\x00\xF4\x11d',b'\x00\x04\x25\x11qs',b'\x00\x04\x21\x11bsums'),(b'\x00\x00\x04\x18\x00\x00\x00\x02$ggml_type_traits_t',b'\x00\x00\x0F\x11type_name',b'\x00\x00\x22\x11blck_size',b'\x00\x00\x11\x11type_size',b'\x00\x00\xB6\x11is_quantized',b'\x00\x04\x52\x11to_float',b'\x00\x04\x4F\x11from_float',b'\x00\x04\x4F\x11from_float_reference',b'\x00\x04\x50\x11vec_dot',b'\x00\x00\x01\x11vec_dot_type'),(b'\x00\x00\x04\x2C\x00\x00\x00\x02__darwin_pthread_handler_rec',b'\x00\x04\x51\x11__routine',b'\x00\x00\x10\x11__arg',b'\x00\x04\x2B\x11__next'),(b'\x00\x00\x03\xEF\x00\x00\x00\x02_opaque_pthread_attr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x0B\x11__opaque'),(b'\x00\x00\x03\xF0\x00\x00\x00\x02_opaque_pthread_cond_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x07\x11__opaque'),(b'\x00\x00\x03\xF1\x00\x00\x00\x02_opaque_pthread_condattr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x11\x11__opaque'),(b'\x00\x00\x03\xF2\x00\x00\x00\x02_opaque_pthread_mutex_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x0B\x11__opaque'),(b'\x00\x00\x03\xF3\x00\x00\x00\x02_opaque_pthread_mutexattr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x11\x11__opaque'),(b'\x00\x00\x03\xF4\x00\x00\x00\x02_opaque_pthread_once_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x11\x11__opaque'),(b'\x00\x00\x03\xF5\x00\x00\x00\x02_opaque_pthread_rwlock_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x03\x11__opaque'),(b'\x00\x00\x03\xF6\x00\x00\x00\x02_opaque_pthread_rwlockattr_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x01\x11__opaque'),(b'\x00\x00\x04\x2E\x00\x00\x00\x02_opaque_pthread_t',b'\x00\x04\x20\x11__sig',b'\x00\x04\x2B\x11__cleanup_stack',b'\x00\x04\x0F\x11__opaque'),(b'\x00\x00\x04\x2F\x00\x00\x00\x10ggml_allocr',),(b'\x00\x00\x04\x30\x00\x00\x00\x02ggml_cgraph',b'\x00\x00\x22\x11n_nodes',b'\x00\x00\x22\x11n_leafs',b'\x00\x04\x39\x11nodes',b'\x00\x04\x39\x11grads',b'\x00\x04\x39\x11leafs',b'\x00\x04\x4D\x11visited_hash_table',b'\x00\x00\x22\x11perf_runs',b'\x00\x00\xDB\x11perf_cycles',b'\x00\x00\xDB\x11perf_time_us'),(b'\x00\x00\x04\x31\x00\x00\x00\x02ggml_compute_params',b'\x00\x04\x17\x11type',b'\x00\x00\x22\x11ith',b'\x00\x00\x22\x11nth',b'\x00\x00\x11\x11wsize',b'\x00\x00\x10\x11wdata'),(b'\x00\x00\x04\x32\x00\x00\x00\x10ggml_context',),(b'\x00\x00\x04\x33\x00\x00\x00\x02ggml_cplan',b'\x00\x00\x11\x11work_size',b'\x00\x04\x3F\x11work_data',b'\x00\x00\x22\x11n_threads',b'\x00\x04\x19\x11n_tasks',b'\x00\x03\xEE\x11abort_callback',b'\x00\x00\x10\x11abort_callback_data'),(b'\x00\x00\x00\xBC\x00\x00\x00\x02ggml_init_params',b'\x00\x00\x11\x11mem_size',b'\x00\x00\x10\x11mem_buffer',b'\x00\x00\xB6\x11no_alloc'),(b'\x00\x00\x04\x34\x00\x00\x00\x10ggml_metal_context',),(b'\x00\x00\x04\x35\x00\x00\x00\x10ggml_mpi_context',),(b'\x00\x00\x04\x37\x00\x00\x00\x02ggml_object',b'\x00\x00\x11\x11offs',b'\x00\x00\x11\x11size',b'\x00\x04\x36\x11next',b'\x00\x04\x15\x11type',b'\x00\x04\x09\x11padding'),(b'\x00\x00\x04\x38\x00\x00\x00\x02ggml_opt_context',b'\x00\x00\x0B\x11ctx',b'\x00\x00\x50\x11params',b'\x00\x00\x22\x11iter',b'\x00\x00\xDB\x11nx',b'\x00\x00\xB6\x11just_initialized',b'\x00\x04\x29\x11adam',b'\x00\x04\x2A\x11lbfgs'),(b'\x00\x00\x00\x50\x00\x00\x00\x02ggml_opt_params',b'\x00\x00\xC8\x11type',b'\x00\x00\x22\x11n_threads',b'\x00\x00\x22\x11past',b'\x00\x00\xF4\x11delta',b'\x00\x00\x22\x11max_no_improvement',b'\x00\x00\xB6\x11print_forward_graph',b'\x00\x00\xB6\x11print_backward_graph',b'\x00\x04\x27\x11adam',b'\x00\x04\x28\x11lbfgs'),(b'\x00\x00\x02\x48\x00\x00\x00\x02ggml_scratch',b'\x00\x00\x11\x11offs',b'\x00\x00\x11\x11size',b'\x00\x00\x10\x11data'),(b'\x00\x00\x04\x3D\x00\x00\x00\x02ggml_tensor',b'\x00\x00\x01\x11type',b'\x00\x04\x13\x11backend',b'\x00\x00\x22\x11n_dims',b'\x00\x04\x1E\x11ne',b'\x00\x04\x4B\x11nb',b'\x00\x00\x2E\x11op',b'\x00\x04\x1B\x11op_params',b'\x00\x00\xB6\x11is_param',b'\x00\x00\x08\x11grad',b'\x00\x04\x3B\x11src',b'\x00\x00\x22\x11perf_runs',b'\x00\x00\xDB\x11perf_cycles',b'\x00\x00\xDB\x11perf_time_us',b'\x00\x00\x10\x11data',b'\x00\x04\x0D\x11name',b'\x00\x00\x10\x11extra',b'\x00\x04\x09\x11padding'),(b'\x00\x00\x04\x3E\x00\x00\x00\x10gguf_context',),(b'\x00\x00\x02\x24\x00\x00\x00\x02gguf_init_params',b'\x00\x00\xB6\x11no_alloc',b'\x00\x00\xB0\x11ctx')),
+- examples/python/ggml/cffi.py:10     _typenames = (b'\x00\x00\x00\xDB__darwin_blkcnt_t',b'\x00\x00\x00\x22__darwin_blksize_t',b'\x00\x00\x00\x11__darwin_clock_t',b'\x00\x00\x00\x22__darwin_ct_rune_t',b'\x00\x00\x00\x22__darwin_dev_t',b'\x00\x00\x03\xBF__darwin_fsblkcnt_t',b'\x00\x00\x03\xBF__darwin_fsfilcnt_t',b'\x00\x00\x03\xBF__darwin_gid_t',b'\x00\x00\x03\xBF__darwin_id_t',b'\x00\x00\x04\x4A__darwin_ino64_t',b'\x00\x00\x04\x4A__darwin_ino_t',b'\x00\x00\x04\x20__darwin_intptr_t',b'\x00\x00\x03\xBF__darwin_mach_port_name_t',b'\x00\x00\x03\xBF__darwin_mach_port_t',b'\x00\x00\x03\xF7__darwin_mbstate_t',b'\x00\x00\x00\x6C__darwin_mode_t',b'\x00\x00\x03\xBF__darwin_natural_t',b'\x00\x00\x00\xDB__darwin_off_t',b'\x00\x00\x00\x22__darwin_pid_t',b'\x00\x00\x03\xEF__darwin_pthread_attr_t',b'\x00\x00\x03\xF0__darwin_pthread_cond_t',b'\x00\x00\x03\xF1__darwin_pthread_condattr_t',b'\x00\x00\x00\x11__darwin_pthread_key_t',b'\x00\x00\x03\xF2__darwin_pthread_mutex_t',b'\x00\x00\x03\xF3__darwin_pthread_mutexattr_t',b'\x00\x00\x03\xF4__darwin_pthread_once_t',b'\x00\x00\x03\xF5__darwin_pthread_rwlock_t',b'\x00\x00\x03\xF6__darwin_pthread_rwlockattr_t',b'\x00\x00\x04\x2D__darwin_pthread_t',b'\x00\x00\x04\x20__darwin_ptrdiff_t',b'\x00\x00\x00\x22__darwin_rune_t',b'\x00\x00\x03\xBF__darwin_sigset_t',b'\x00\x00\x00\x11__darwin_size_t',b'\x00\x00\x03\xBF__darwin_socklen_t',b'\x00\x00\x04\x20__darwin_ssize_t',b'\x00\x00\x00\x22__darwin_suseconds_t',b'\x00\x00\x04\x20__darwin_time_t',b'\x00\x00\x03\xBF__darwin_uid_t',b'\x00\x00\x03\xBF__darwin_useconds_t',b'\x00\x00\x04\x05__darwin_uuid_string_t',b'\x00\x00\x04\x44__darwin_uuid_t',b'\x00\x00\x00\x22__darwin_wchar_t',b'\x00\x00\x00\x22__darwin_wint_t',b'\x00\x00\x03\xB0__int16_t',b'\x00\x00\x00\x22__int32_t',b'\x00\x00\x00\xDB__int64_t',b'\x00\x00\x03\xB5__int8_t',b'\x00\x00\x03\xF7__mbstate_t',b'\x00\x00\x00\x6C__uint16_t',b'\x00\x00\x03\xBF__uint32_t',b'\x00\x00\x04\x4A__uint64_t',b'\x00\x00\x03\xBA__uint8_t',b'\x00\x00\x03\xF8block_q2_K',b'\x00\x00\x03\xF9block_q3_K',b'\x00\x00\x03\xFAblock_q4_K',b'\x00\x00\x03\xFBblock_q5_K',b'\x00\x00\x03\xFCblock_q6_K',b'\x00\x00\x03\xFDblock_q8_K',b'\x00\x00\x01\xEAggml_binary_op_f32_t',b'\x00\x00\x02\x02ggml_custom1_op_f32_t',b'\x00\x00\x02\x07ggml_custom1_op_t',b'\x00\x00\x01\xF0ggml_custom2_op_f32_t',b'\x00\x00\x01\xF6ggml_custom2_op_t',b'\x00\x00\x01\xC5ggml_custom3_op_f32_t',b'\x00\x00\x01\xCCggml_custom3_op_t',b'\x00\x00\x00\x6Cggml_fp16_t',b'\x00\x00\x04\x4Fggml_from_float_t',b'\x00\x00\x04\x52ggml_to_float_t',b'\x00\x00\x04\x18ggml_type_traits_t',b'\x00\x00\x01\xFDggml_unary_op_f32_t',b'\x00\x00\x04\x50ggml_vec_dot_t',b'\x00\x00\x03\xB0int16_t',b'\x00\x00\x00\x22int32_t',b'\x00\x00\x00\xDBint64_t',b'\x00\x00\x03\xB5int8_t',b'\x00\x00\x03\xB0int_fast16_t',b'\x00\x00\x00\x22int_fast32_t',b'\x00\x00\x00\xDBint_fast64_t',b'\x00\x00\x03\xB5int_fast8_t',b'\x00\x00\x03\xB0int_least16_t',b'\x00\x00\x00\x22int_least32_t',b'\x00\x00\x00\xDBint_least64_t',b'\x00\x00\x03\xB5int_least8_t',b'\x00\x00\x04\x20intmax_t',b'\x00\x00\x04\x20intptr_t',b'\x00\x00\x04\x1Dmax_align_t',b'\x00\x00\x04\x20ptrdiff_t',b'\x00\x00\x00\xDBregister_t',b'\x00\x00\x00\x11rsize_t',b'\x00\x00\x00\x11size_t',b'\x00\x00\x04\x4Asyscall_arg_t',b'\x00\x00\x00\x6Cu_int16_t',b'\x00\x00\x03\xBFu_int32_t',b'\x00\x00\x04\x4Au_int64_t',b'\x00\x00\x03\xBAu_int8_t',b'\x00\x00\x00\x6Cuint16_t',b'\x00\x00\x03\xBFuint32_t',b'\x00\x00\x04\x4Auint64_t',b'\x00\x00\x03\xBAuint8_t',b'\x00\x00\x00\x6Cuint_fast16_t',b'\x00\x00\x03\xBFuint_fast32_t',b'\x00\x00\x04\x4Auint_fast64_t',b'\x00\x00\x03\xBAuint_fast8_t',b'\x00\x00\x00\x6Cuint_least16_t',b'\x00\x00\x03\xBFuint_least32_t',b'\x00\x00\x04\x4Auint_least64_t',b'\x00\x00\x03\xBAuint_least8_t',b'\x00\x00\x00\x11uintmax_t',b'\x00\x00\x00\x11uintptr_t',b'\x00\x00\x04\x4Auser_addr_t',b'\x00\x00\x00\xDBuser_long_t',b'\x00\x00\x00\xDBuser_off_t',b'\x00\x00\x04\x4Auser_size_t',b'\x00\x00\x00\xDBuser_ssize_t',b'\x00\x00\x00\xDBuser_time_t',b'\x00\x00\x04\x4Auser_ulong_t',b'\x00\x00\x00\x22wchar_t'),
+
+https://github.com/bingoogolapple/BGAQRCode-Android
+- zbar/src/main/jni/config.h:59 /* Define to 1 if you have the `pthread' library (-lpthread). */
+- zbar/src/main/jni/config.h:80 /* Define to 1 if you have the <pthread.h> header file. */
+- zbar/src/main/jni/config.h:193    <pthread.h>, or <semaphore.h> is not used. If the typedef were allowed, the
+- zbar/src/main/jni/config.h:198    <pthread.h>, or <semaphore.h> is not used. If the typedef were allowed, the
+- zbar/src/main/jni/config.h:205 /* used only for pthread debug attributes */
+
+https://github.com/Klipper3d/klipper
+- src/linux/sensor_ds18b20.c:12 #include <pthread.h> // pthread_create
+- src/linux/sensor_ds18b20.c:45     pthread_mutex_t lock;
+- src/linux/sensor_ds18b20.c:46     pthread_cond_t cond;
+- src/linux/sensor_ds18b20.c:61     pthread_mutex_lock(&d->lock);
+- src/linux/sensor_ds18b20.c:65         pthread_mutex_unlock(&d->lock);
+
+https://github.com/Wind4/vlmcsd
+- src/shared_globals.c:141 pthread_mutex_t logmutex = PTHREAD_MUTEX_INITIALIZER;
+- src/kms.c:174 pthread_mutex_t* mutex;
+- src/kms.c:175 #define mutex_size (((sizeof(pthread_mutex_t)+7)>>3)<<3)
+- src/kms.c:186 #define lock_client_lists() pthread_mutex_lock(mutex)
+- src/kms.c:187 #define unlock_client_lists() pthread_mutex_unlock(mutex)
+
+https://github.com/wazuh/wazuh
+- src/shared/pthreads_op.c:13 #include <pthread.h>
+- src/shared/pthreads_op.c:20 int CreateThreadJoinable(pthread_t *lthread, void * (*function_pointer)(void *), void *data)
+- src/shared/pthreads_op.c:22     pthread_attr_t attr;
+- src/shared/pthreads_op.c:27     if (pthread_attr_init(&attr)) {
+- src/shared/pthreads_op.c:35     if (pthread_attr_setstacksize(&attr, read_size)) {
+
