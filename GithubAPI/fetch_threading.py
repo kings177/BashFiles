@@ -94,7 +94,7 @@ def load_repos(filename):
     with open(filename, 'r') as file:
         return json.load(file)
 
-api_tokens = ['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', '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', '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'] # Kingu | Sipher | Pedro
+api_tokens = ['token1', 'token2', 'token3']
 
 threading_keywords = {
     'C': 'pthread',
