@@ -2,6 +2,7 @@ import requests
 import json
 import time
 import base64
+import os
 
 def load_repos(filename):
     with open(filename, 'r') as file:
@@ -69,7 +70,7 @@ def analyze_repositories(language, threading_keyword, api_token):
             found_repos[repo_url] = found_lines
     return found_repos
 
-api_token = 'YOUR_TOKEN'
+api_token = os.getenv('GITHUB_API_TOKEN')
 threading_keywords = {
     'C': 'pthread',
     'C++': 'pthread',

@@ -1,6 +1,7 @@
 import requests
 import time
 import json
+import os
 
 def fetch_repos(language, api_token, max_repos=100):
     repos = []
@@ -34,7 +35,7 @@ def save_repos_to_file(repos, language):
     with open(f'./jsons/{language}_100_repos.json', 'w') as file:
         json.dump(repos, file, indent=4)
 
-api_token= 'YOUR_TOKEN' # make it a env-var if you want
+api_token= os.getenv('GITHUB_API_TOKEN')
 languages = ['C', 'C++'] # Just C/C++ cuz... yeah!
 
 for language in languages:
