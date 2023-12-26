@@ -4,58 +4,31 @@ on:
   push:
   workflow_dispatch:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
     - name: Test
       run: |
         exit 1
-
     - name: Notify Discord on Failure
       if: failure()
       run: |
-        COMMITTER_GITHUB=$(git show -s --format='%cn')
+        COMMITTER_GITHUB=$(git show -s --format='%cn')        
   
         case "$COMMITTER_GITHUB" in
           "kings177")
-            DISCORD_ID="353453210389839872" # Kingu's ID
+            DISCORD_ID="353453210389839872" # My ID
             ;;
-        #   "developedby")
-        #     DISCORD_ID="204040567859052544" # Nicolas' ID
-        #     ;;
-        #   "eduhenke")
-        #     DISCORD_ID="572073628779413504" # Henke's ID
-        #     ;;
-        #   "boscop")
-        #     DISCORD_ID="187114713086296064" # Localhorse's ID
-        #     ;;
-        #   "derenash")
-        #     DISCORD_ID="191410663292272640" # Derenash's ID
-        #     ;;
-        #   "sergiobonatto")
-        #     DISCORD_ID="715372754408439852" # SergioBonatto's ID
-        #     ;;
-        #   "naoehsavio")
-        #     DISCORD_ID="750119455530418276" # NaoEhSavio's ID
-        #     ;;
-        #   "test")
-        #     DISCORD_ID="353453210389839872" # Kingu's ID
-        #     ;;
           *)
             DISCORD_ID=""
             ;;
         esac
         
         CI_LINK="<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>"
-
-        # secrets.DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/1138292630699118733/-9QfspX7aBxiVYRKgyf70eBNBpCG6EhLWNHnEmdFsUmkx24RgTj3i-TkfR4ttiocUomh"
-
+        
         if [ ! -z "$DISCORD_ID" ]; then
           MESSAGE="The CI from <@$DISCORD_ID>'s commit has failed, please check: $CI_LINK"
           curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
@@ -65,5 +38,5 @@ jobs:
               "username": "Kindelia Bot"
             }'
         else
-          echo "Commit Owner not part of the Kindelia Team. CI failed: $CI_LINK"
+          echo "CI failed: $CI_LINK"
         fi
